@@ -40,20 +40,20 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/spring-voice
 
 
-      # EC2 서버에 배포
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            CONTAINER_ID=$(docker ps -q -f name=spring-voice)
-            if [ ! -z "$CONTAINER_ID" ]; then
-              docker stop $CONTAINER_ID
-              docker rm $CONTAINER_ID
-            fi
-            
-            docker pull ${{ secrets.DOCKER_USERNAME }}/spring-voice
-            docker run -d --name spring-voice --log-driver=syslog -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/spring-voice
-            docker image prune -f
+#      # EC2 서버에 배포
+#      - name: Deploy to EC2
+#        uses: appleboy/ssh-action@v1.0.3
+#        with:
+#          host: ${{ secrets.HOST }}
+#          username: ${{ secrets.SERVER_USERNAME }}
+#          key: ${{ secrets.SSH_KEY }}
+#          script: |
+#            CONTAINER_ID=$(docker ps -q -f name=spring-voice)
+#            if [ ! -z "$CONTAINER_ID" ]; then
+#              docker stop $CONTAINER_ID
+#              docker rm $CONTAINER_ID
+#            fi
+#
+#            docker pull ${{ secrets.DOCKER_USERNAME }}/spring-voice
+#            docker run -d --name spring-voice --log-driver=syslog -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/spring-voice
+#            docker image prune -f
