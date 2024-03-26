@@ -19,7 +19,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import static com.ilovegogi.VoiceFinder.global.response.SuccessCode.SUCCESS_USER_LOGIN;
 
@@ -57,18 +56,19 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         log.info("로그인 성공 및 JWT 생성");
         User user = ((UserDetailsImpl)authResult.getPrincipal()).getUser();
-        String username = user.getEmail();
-        UserRoleEnum role = user.getRole();
+        String accessToken = jwtUtil.createAccessToken(user.getId(), user.getEmail(), user.getRole());
+        String refreshToken = jwtUtil.createRefreshToken(user.getId(), user.getEmail(), user.getRole());
 
-        String token = jwtUtil.createToken(username, role);
-        jwtUtil.addJwtToCookie(token, response);
+        // Refresh Token을 Redis에 저장
+        jwtUtil.storeRefreshToken(user.getEmail(), refreshToken);
 
-        String result = mapper.writeValueAsString(
-                ApiResponse.of(SUCCESS_USER_LOGIN.getCode(), SUCCESS_USER_LOGIN.getMessage(), username)
-        );
+        // Access Token을 Client에 반환
+        response.addHeader("Authorization", accessToken);
+
+        ApiResponse apiResponse = ApiResponse.of(SUCCESS_USER_LOGIN.getCode(), SUCCESS_USER_LOGIN.getMessage(), user.getEmail());
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().write(result);
+        response.getWriter().write(mapper.writeValueAsString(apiResponse));
     }
 
     @Override

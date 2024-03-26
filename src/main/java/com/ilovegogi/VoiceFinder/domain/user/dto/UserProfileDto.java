@@ -15,14 +15,12 @@ public class UserProfileDto {
     String email;
     LocalDate birthDate;
     String gender;
-    private UserRoleEnum role;
 
     public UserProfileDto(User user) {
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.birthDate = user.getBirthDate();
         this.gender = user.getGender();
-        this.role = user.getRole();
     }
 
 }

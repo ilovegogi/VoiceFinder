@@ -2,6 +2,7 @@ package com.ilovegogi.VoiceFinder.domain.user.service;
 
 
 import com.ilovegogi.VoiceFinder.domain.user.dto.SignupRequestDto;
+import com.ilovegogi.VoiceFinder.domain.user.dto.UpdateProfileRequestDto;
 import com.ilovegogi.VoiceFinder.domain.user.dto.UserProfileDto;
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
 
@@ -13,5 +14,5 @@ public interface UserService {
 
 
     // 프로필 수정
-    UserProfileDto updateUserProfile(User user, SignupRequestDto.UpdateProfileRequestDto requestDto);
+    UserProfileDto updateUserProfile(User user, UpdateProfileRequestDto requestDto);
 }

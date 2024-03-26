@@ -1,18 +1,20 @@
 spring:
   config:
     activate:
-      on-profile: test
+      on-profile: local
 
-  data:
-    redis:
-      host: localhost
-      port: 6379
+  redis:
+    host: localhost
+#      host: host.docker.internal
+    port: 6379
+    password: ${SPRING_REDIS_PASSWORD}
 
   datasource:
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-    url: jdbc:h2:mem:testdb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,7 +23,6 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
-
 
 jwt:
   secret:

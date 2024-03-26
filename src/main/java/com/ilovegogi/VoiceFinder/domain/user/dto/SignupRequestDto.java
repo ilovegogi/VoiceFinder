@@ -36,7 +36,4 @@ public class SignupRequestDto {
         this.admin = admin;
         this.adminToken = adminToken;
     }
-
-    public static class UpdateProfileRequestDto {
-    }
 }
