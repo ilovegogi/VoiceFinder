@@ -1,6 +1,7 @@
 package com.ilovegogi.VoiceFinder.domain.user.service;
 
 import com.ilovegogi.VoiceFinder.domain.user.dto.SignupRequestDto;
+import com.ilovegogi.VoiceFinder.domain.user.dto.UpdateProfileRequestDto;
 import com.ilovegogi.VoiceFinder.domain.user.dto.UserProfileDto;
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
 import com.ilovegogi.VoiceFinder.domain.user.entity.UserRoleEnum;
@@ -49,7 +50,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDto updateUserProfile(User user, SignupRequestDto.UpdateProfileRequestDto requestDto) {
-        return null;
+    public UserProfileDto updateUserProfile(User user, UpdateProfileRequestDto requestDto) {
+        // 기존 비밀번호가 일치하는지 검증
+        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+            throw new CustomException(ErrorCode.NOT_MATCH_PASSWORD);
+        }
+
+        if (requestDto.getNewPassword() != null && !requestDto.getNewPassword().trim().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
+        }
+        if (requestDto.getUsername() != null && !requestDto.getUsername().trim().isEmpty()) {
+            user.setUsername(requestDto.getUsername());
+        }
+        if (requestDto.getGender() != null && !requestDto.getGender().trim().isEmpty()) {
+            user.setGender(requestDto.getGender());
+        }
+
+        User updatedUser = userRepository.save(user);
+        return new UserProfileDto(updatedUser);
     }
+
 }

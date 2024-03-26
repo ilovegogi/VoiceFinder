@@ -4,6 +4,7 @@ package com.ilovegogi.VoiceFinder.global.config;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtAuthenticationFilter;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtAuthorizationFilter;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtUtil;
+import com.ilovegogi.VoiceFinder.global.redis.RedisUtil;
 import com.ilovegogi.VoiceFinder.global.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -31,6 +32,7 @@ import java.util.Arrays;
 public class WebSecurityConfig {
 
     private final JwtUtil jwtUtil;
+    private final RedisUtil redisUtil;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
 
@@ -53,7 +55,7 @@ public class WebSecurityConfig {
 
     @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter() {
-        return new JwtAuthorizationFilter(jwtUtil, userDetailsService);
+        return new JwtAuthorizationFilter(jwtUtil, redisUtil, userDetailsService);
     }
 
     // CORS 설정을 위한 CorsConfigurationSource 빈 정의
@@ -87,7 +89,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메소드 허용
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                         .requestMatchers("/").permitAll() // 메인 페이지 요청 허가
-                        .requestMatchers("/api/users/**").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
+                        .requestMatchers("/api/users/login","/api/users/signup").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
