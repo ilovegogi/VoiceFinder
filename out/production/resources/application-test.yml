@@ -3,12 +3,16 @@ spring:
     activate:
       on-profile: test
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/VoiceFinder
     username: sa
     password:
-
+    url: jdbc:h2:mem:testdb
   jpa:
     hibernate:
       ddl-auto: create
@@ -23,3 +27,14 @@ jwt:
   secret:
     key: ${jwt_secret_key}
 
+cloud:
+  aws:
+    s3:
+      bucket: ${S3_BUCKET}
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+    credentials:
+      accessKey: ${AWS_ACCESSKEY}
+      secretKey: ${AWS_SECRETKEY}

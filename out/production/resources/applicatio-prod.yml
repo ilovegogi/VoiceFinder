@@ -1,14 +1,12 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: prod
 
   data:
     redis:
-      host: localhost
-  #      host: host.docker.internal
+      host: ${HOST}
       port: 6379
-      password: ${SPRING_REDIS_PASSWORD}
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,7 +16,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true

@@ -4,11 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="094bc62a-5e7d-4ba4-a628-6dc7167fa89c" name="Changes" comment="">
+    <list default="true" id="094bc62a-5e7d-4ba4-a628-6dc7167fa89c" name="Changes" comment="..">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/VoiceFinderApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/VoiceFinderApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/dto/SignupRequestDto$UpdateProfileRequestDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/dto/SignupRequestDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/dto/SignupRequestDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/dto/UserProfileDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/dto/UserProfileDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/service/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/domain/user/service/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/config/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/jwt/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/jwt/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/jwt/JwtAuthorizationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/jwt/JwtAuthorizationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/jwt/JwtUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/jwt/JwtUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/security/UserDetailsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/ilovegogi/VoiceFinder/global/security/UserDetailsImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ilovegogi/VoiceFinder/domain/user/dto/SignupRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ilovegogi/VoiceFinder/domain/user/dto/SignupRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ilovegogi/VoiceFinder/global/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ilovegogi/VoiceFinder/global/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ilovegogi/VoiceFinder/global/redis/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ilovegogi/VoiceFinder/global/redis/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +58,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="develop_local" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -86,7 +101,7 @@
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop__local&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/1224s/Spring/VoiceFinder&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -113,6 +128,7 @@
         <env name="SPRING_DATASOURCE_PASSWORD" value="**se1224" />
         <env name="SPRING_DATASOURCE_URL" value="jdbc:mysql://127.0.0.1:3306/VoiceFinder" />
         <env name="SPRING_DATASOURCE_USERNAME" value="VoiceFinder" />
+        <env name="SPRING_REDIS_PASSWORD" value="**se1224" />
       </envs>
       <module name="VoiceFinder.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ilovegogi.VoiceFinder.VoiceFinderApplication" />
@@ -150,8 +166,19 @@
       <workItem from="1711427030889" duration="984000" />
       <workItem from="1711428029767" duration="2412000" />
       <workItem from="1711433276624" duration="556000" />
-      <workItem from="1711433950853" duration="1926000" />
+      <workItem from="1711433950853" duration="3363000" />
+      <workItem from="1711513983430" duration="2388000" />
+      <workItem from="1711519951537" duration="302000" />
     </task>
+    <task id="LOCAL-00001" summary="..">
+      <option name="closed" value="true" />
+      <created>1711437652169</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711437652169</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +207,21 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=".." />
+    <option name="LAST_COMMIT_MESSAGE" value=".." />
+  </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.springframework.boot.web.server.WebServerException" package="org.springframework.boot.web.server" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
