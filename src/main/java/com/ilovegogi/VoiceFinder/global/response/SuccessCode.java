@@ -60,6 +60,10 @@ public enum SuccessCode {
     /* GOODS_SEQUENCE_SEAT */
 
 
+    /* MARKET */
+    SUCCESS_MARKET_CREATE(HttpStatus.CREATED, "M08000", "마켓 신규 등록에 성공했습니다."),
+
+
 
 
     /* POINT */
