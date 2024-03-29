@@ -25,6 +25,9 @@ public enum ErrorCode {
     INVALID_VERIFICATION_NUMBER(HttpStatus.BAD_REQUEST, "U10700", "잘못된 인증 번호 입니다."),
     EXCEED_VERIFICATION_TIME(HttpStatus.BAD_REQUEST, "U10701", "인증 번호 입력 시간 초과 입니다."),
 
+    /* MARKET */
+    EXISTED_MARKET(HttpStatus.CONFLICT, "M10100", "이미 등록된 매장입니다."),
+
 
     /* CAMPAIGNS */
     ALREADY_ENDED_CAMPAIGNS(HttpStatus.CONFLICT, "C10000", "이미 종료된 캠페인입니다."),
