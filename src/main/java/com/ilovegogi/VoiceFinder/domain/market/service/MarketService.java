@@ -12,8 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -25,13 +23,14 @@ public class MarketService {
     @Transactional
     public MarketRegistrationResponseDto registrationMarket(MarketRegistrationRequestDto marketRegistrationRequestDto) {
         validateMarketExist(marketRegistrationRequestDto.getName(), marketRegistrationRequestDto.getOwnerId());
-        Address location = new Address(marketRegistrationRequestDto.getLocation().getCity(), marketRegistrationRequestDto.getLocation().getStreet(), marketRegistrationRequestDto.getLocation().getDetail());
+        Address location = new Address(marketRegistrationRequestDto.getAddress().getCity(), marketRegistrationRequestDto.getAddress().getStreet(), marketRegistrationRequestDto.getAddress().getDetail());
         Market market = Market.builder()
                 .category(marketRegistrationRequestDto.getCategory())
                 .location(location)
                 .ownerId(marketRegistrationRequestDto.getOwnerId())
                 .name(marketRegistrationRequestDto.getName())
                 .description(marketRegistrationRequestDto.getDescription())
+                .wayDescription(marketRegistrationRequestDto.getWayDescription())
                 .build();
         marketRepository.save(market);
         return new MarketRegistrationResponseDto(market.getOwnerId());

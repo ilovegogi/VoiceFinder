@@ -14,7 +14,8 @@ public class MarketRegistrationRequestDto {
     private Category category;
     private Long ownerId;
     private String name;
-    private Address location;
+    private Address address;
     private String description;
+    private String wayDescription;
 
 }
