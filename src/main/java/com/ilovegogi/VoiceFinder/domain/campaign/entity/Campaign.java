@@ -3,6 +3,7 @@ package com.ilovegogi.VoiceFinder.domain.campaign.entity;
 import com.ilovegogi.VoiceFinder.domain.market.entity.Market;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
@@ -74,5 +75,19 @@ public class Campaign {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "market_id")
     private Market market;
+
+    @Builder
+    public Campaign(LocalDateTime applyStartTime, LocalDateTime applyEndTime, LocalDateTime resultAnnouncementTime, LocalDateTime registrationStartTime, LocalDateTime registrationEndTime, String provision, String day, String visitingTime, String reservationDescription, Market market) {
+        this.applyStartTime = applyStartTime;
+        this.applyEndTime = applyEndTime;
+        this.resultAnnouncementTime = resultAnnouncementTime;
+        this.registrationStartTime = registrationStartTime;
+        this.registrationEndTime = registrationEndTime;
+        this.provision = provision;
+        this.day = day;
+        this.visitingTime = visitingTime;
+        this.reservationDescription = reservationDescription;
+        this.market = market;
+    }
 
 }

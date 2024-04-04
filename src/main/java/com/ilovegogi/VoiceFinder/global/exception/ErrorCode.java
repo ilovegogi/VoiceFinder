@@ -27,6 +27,7 @@ public enum ErrorCode {
 
     /* MARKET */
     EXISTED_MARKET(HttpStatus.CONFLICT, "M10100", "이미 등록된 매장입니다."),
+    NOT_FOUND_MARKET(HttpStatus.NOT_FOUND, "M10000", "해당하는 매장을 찾지 못했습니다."),
 
 
     /* CAMPAIGNS */

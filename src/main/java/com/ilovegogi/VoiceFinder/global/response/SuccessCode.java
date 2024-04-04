@@ -63,6 +63,9 @@ public enum SuccessCode {
     /* MARKET */
     SUCCESS_MARKET_CREATE(HttpStatus.CREATED, "M08000", "마켓 신규 등록에 성공했습니다."),
 
+    /* CAMPAIGN */
+    SUCCESS_CAMPAIGN_TIME_VISIT_INFO_CREATE(HttpStatus.CREATED, "C00100", "신규 캠페인 시간, 방문 정보 등록에 성공했습니다."),
+
 
 
 
