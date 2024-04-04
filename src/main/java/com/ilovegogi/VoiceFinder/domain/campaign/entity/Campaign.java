@@ -28,7 +28,7 @@ public class Campaign {
     @Comment("결과 발표 시간")
     private LocalDateTime resultAnnouncementTime;
 
-    @Comment("콘텐츠 등로 시작 시간")
+    @Comment("콘텐츠 등록 시작 시간")
     private LocalDateTime registrationStartTime;
 
     private LocalDateTime registrationEndTime;
@@ -46,6 +46,13 @@ public class Campaign {
     private String reservationDescription;
 
     //todo : 키워드 배열 어떻게 넘길 건지
+    //Json 형식 String으로 DB에 밀어 넣기
+
+    @Comment("필수 키워드")
+    private String keyword;
+
+    @Comment("추가 키워드")
+    private String additionalKeyword;
 
     @Comment("최소 글자 수")
     private int minTextNum;

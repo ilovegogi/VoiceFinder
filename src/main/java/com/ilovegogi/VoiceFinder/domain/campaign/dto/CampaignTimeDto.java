@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class CampaignBasicVisitInfoRequestDto {
-
-
+@NoArgsConstructor
+public class CampaignTimeDto<T> {
+    private T time;
 }
