@@ -27,7 +27,7 @@ public class Market {
     private Long ownerId;
 
     @Embedded
-    private Address location;
+    private Address address;
 
     private String name;
 
@@ -44,10 +44,10 @@ public class Market {
     private List<Campaign> campaigns = new ArrayList<>();
 
     @Builder
-    public Market(Category category, Long ownerId, Address location, String name, String description, String wayDescription) {
+    public Market(Category category, Long ownerId, Address address, String name, String description, String wayDescription) {
         this.category = category;
         this.ownerId = ownerId;
-        this.location = location;
+        this.address = address;
         this.name = name;
         this.description = description;
         this.wayDescription = wayDescription;

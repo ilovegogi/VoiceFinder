@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.campaign.entity;
 
+import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignMissionRequestDto;
 import com.ilovegogi.VoiceFinder.domain.market.entity.Market;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -90,4 +91,13 @@ public class Campaign {
         this.market = market;
     }
 
+    public void registrationCampaignMission(CampaignMissionRequestDto campaignMissionRequestDto) {
+        keyword = campaignMissionRequestDto.getKeyword();
+        additionalKeyword = campaignMissionRequestDto.getAdditionalKeyword();
+        minTextNum = campaignMissionRequestDto.getMinTextNum();
+        minImageNum = campaignMissionRequestDto.getMinTextNum();
+        isMap = campaignMissionRequestDto.getIsMap();
+        etcComment = campaignMissionRequestDto.getEtcComment();
+        notandum = campaignMissionRequestDto.getNotandum();
+    }
 }

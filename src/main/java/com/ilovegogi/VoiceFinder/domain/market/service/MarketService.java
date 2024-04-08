@@ -1,7 +1,9 @@
 package com.ilovegogi.VoiceFinder.domain.market.service;
 
+import com.ilovegogi.VoiceFinder.domain.market.dto.MarketListResponseDto;
 import com.ilovegogi.VoiceFinder.domain.market.dto.MarketRegistrationRequestDto;
 import com.ilovegogi.VoiceFinder.domain.market.dto.MarketRegistrationResponseDto;
+import com.ilovegogi.VoiceFinder.domain.market.dto.MarketResponseDto;
 import com.ilovegogi.VoiceFinder.domain.market.entity.Market;
 import com.ilovegogi.VoiceFinder.domain.market.repository.MarketRepository;
 import com.ilovegogi.VoiceFinder.domain.user.entity.Address;
@@ -11,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,10 +28,10 @@ public class MarketService {
     @Transactional
     public MarketRegistrationResponseDto registrationMarket(MarketRegistrationRequestDto marketRegistrationRequestDto) {
         validateMarketExist(marketRegistrationRequestDto.getName(), marketRegistrationRequestDto.getOwnerId());
-        Address location = new Address(marketRegistrationRequestDto.getAddress().getCity(), marketRegistrationRequestDto.getAddress().getStreet(), marketRegistrationRequestDto.getAddress().getDetail());
+        Address address = new Address(marketRegistrationRequestDto.getAddress().getCity(), marketRegistrationRequestDto.getAddress().getStreet(), marketRegistrationRequestDto.getAddress().getDetail());
         Market market = Market.builder()
                 .category(marketRegistrationRequestDto.getCategory())
-                .location(location)
+                .address(address)
                 .ownerId(marketRegistrationRequestDto.getOwnerId())
                 .name(marketRegistrationRequestDto.getName())
                 .description(marketRegistrationRequestDto.getDescription())
@@ -44,4 +49,11 @@ public class MarketService {
     }
 
 
+    public MarketResponseDto getMarketList() {
+        List<Market> markets = marketRepository.findAll();
+        List<MarketListResponseDto> list = markets.stream()
+                .map(m -> new MarketListResponseDto(m.getId(), m.getCategory(), m.getOwnerId(), m.getAddress(), m.getName(), m.getDescription(), m.getWayDescription()))
+                .collect(Collectors.toList());
+        return new MarketResponseDto(list);
+    }
 }

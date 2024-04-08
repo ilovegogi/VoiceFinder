@@ -1,7 +1,8 @@
 package com.ilovegogi.VoiceFinder.domain.campaign.controller;
 
+import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignMissionRequestDto;
 import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignTimeVisitInfoRequestDto;
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignTimeVisitInfoResponseDto;
+import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignIdResponseDto;
 import com.ilovegogi.VoiceFinder.domain.campaign.service.CampaignService;
 import com.ilovegogi.VoiceFinder.global.response.ApiResponse;
 import com.ilovegogi.VoiceFinder.global.response.SuccessCode;
@@ -19,12 +20,20 @@ public class CampaignController {
 
     private final CampaignService campaignService;
 
-    @PostMapping("/{id}/campaigns")
-    public ResponseEntity<ApiResponse> registrationCampaignTimeVisitInfo(@PathVariable("id") Long id, @Valid @RequestBody CampaignTimeVisitInfoRequestDto campaignTimeVisitInfoRequestDto) {
-        CampaignTimeVisitInfoResponseDto campaignTimeVisitInfoResponseDto = campaignService.registrationCampaignTimeVisitInfo(id, campaignTimeVisitInfoRequestDto);
-        SuccessCode successCode = SuccessCode.SUCCESS_CAMPAIGN_TIME_VISIT_INFO_CREATE;
+    @PostMapping("/{marketId}/campaigns")
+    public ResponseEntity<ApiResponse> registrationCampaignTimeVisitInfo(@PathVariable("marketId") Long marketId, @Valid @RequestBody CampaignTimeVisitInfoRequestDto campaignTimeVisitInfoRequestDto) {
+        CampaignIdResponseDto campaignIdResponseDto = campaignService.registrationCampaignTimeVisitInfo(marketId, campaignTimeVisitInfoRequestDto);
+        SuccessCode successCode = SuccessCode.SUCCESS_CAMPAIGN_TIME_VISIT_INFO_REGISTRATION;
         return ResponseEntity.status(successCode.getHttpStatus())
-                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignTimeVisitInfoResponseDto));
+                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignIdResponseDto));
+    }
+
+    @PostMapping("/{marketId}/campaigns/{campaignId}")
+    public ResponseEntity<ApiResponse> registrationCampaignMission(@PathVariable("marketId") Long marketId, @PathVariable("campaignId") Long campaignId, @Valid @RequestBody CampaignMissionRequestDto campaignMissionRequestDto) {
+        CampaignIdResponseDto campaignIdResponseDto = campaignService.registrationCampaignMission(marketId, campaignId, campaignMissionRequestDto);
+        SuccessCode successCode = SuccessCode.SUCCESS_CAMPAIGN_MISSION_REGISTRATION;
+        return ResponseEntity.status(successCode.getHttpStatus())
+                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignIdResponseDto));
     }
 
 }

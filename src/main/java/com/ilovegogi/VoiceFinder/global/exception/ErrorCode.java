@@ -31,8 +31,8 @@ public enum ErrorCode {
 
 
     /* CAMPAIGNS */
-    ALREADY_ENDED_CAMPAIGNS(HttpStatus.CONFLICT, "C10000", "이미 종료된 캠페인입니다."),
-    NOT_FOUND_CAMPAIGNS(HttpStatus.NOT_FOUND, "C10100", "해당하는 캠페인 정보를 찾지 못했습니다."),
+    ALREADY_ENDED_CAMPAIGN(HttpStatus.CONFLICT, "C10000", "이미 종료된 캠페인입니다."),
+    NOT_FOUND_CAMPAIGN(HttpStatus.NOT_FOUND, "C10100", "해당하는 캠페인 정보를 찾지 못했습니다."),
 
     /* GLOBAL */
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "", ""),

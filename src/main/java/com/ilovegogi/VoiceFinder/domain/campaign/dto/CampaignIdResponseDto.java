@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CampaignTimeVisitInfoResponseDto {
+public class CampaignIdResponseDto {
 
     private Long id;
 

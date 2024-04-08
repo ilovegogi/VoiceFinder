@@ -7,10 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class MarketRegistrationRequestDto {
+@NoArgsConstructor
+public class MarketListResponseDto {
 
+    private Long id;
     private Category category;
     private Long ownerId;
     private Address address;
