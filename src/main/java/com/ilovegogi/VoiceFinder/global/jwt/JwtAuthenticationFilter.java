@@ -3,7 +3,6 @@ package com.ilovegogi.VoiceFinder.global.jwt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ilovegogi.VoiceFinder.domain.user.dto.LoginRequestDto;
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
-import com.ilovegogi.VoiceFinder.domain.user.entity.UserRoleEnum;
 import com.ilovegogi.VoiceFinder.global.exception.CustomException;
 import com.ilovegogi.VoiceFinder.global.exception.ErrorCode;
 import com.ilovegogi.VoiceFinder.global.response.ApiResponse;

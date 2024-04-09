@@ -2,7 +2,6 @@ package com.ilovegogi.VoiceFinder.domain.user.dto;
 
 
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
-import com.ilovegogi.VoiceFinder.domain.user.entity.UserRoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -4,6 +4,7 @@ package com.ilovegogi.VoiceFinder.global.config;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtAuthenticationFilter;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtAuthorizationFilter;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtUtil;
+import com.ilovegogi.VoiceFinder.global.oauth2.service.CustomOAuth2UserService;
 import com.ilovegogi.VoiceFinder.global.redis.RedisUtil;
 import com.ilovegogi.VoiceFinder.global.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -35,6 +37,8 @@ public class WebSecurityConfig {
     private final RedisUtil redisUtil;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final ClientRegistrationRepository clientRegistrationRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -89,9 +93,15 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메소드 허용
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                         .requestMatchers("/").permitAll() // 메인 페이지 요청 허가
-                        .requestMatchers("/api/users/login","/api/users/signup").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
+                        .requestMatchers("/api/users/login","/api/users/signup","/api/users/kakao/**","/api/users/naver/**").permitAll()
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
-        );
+                )
+                .oauth2Login(oauth2Login -> oauth2Login
+                        .clientRegistrationRepository(clientRegistrationRepository)
+                        .userInfoEndpoint(userInfoEndpoint ->
+                                userInfoEndpoint.userService(customOAuth2UserService)
+                        )
+                );
 
         // 필터 관리
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
