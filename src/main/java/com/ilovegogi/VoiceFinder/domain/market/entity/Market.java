@@ -40,7 +40,7 @@ public class Market {
     //todo: 이미지 작업 + 위도 경도
 
 
-    @OneToMany(mappedBy = "campaign",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "market",cascade = CascadeType.ALL)
     private List<Campaign> campaigns = new ArrayList<>();
 
     @Builder

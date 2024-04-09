@@ -31,8 +31,8 @@ public class JwtUtil {
     // 토큰 만료시간
 //    private final long REFRESH_TOKEN_TIME = 7 * 24 * 60 * 60 * 1000L; // 일주일
 //    private final long ACCESS_TOKEN_TIME = 60 * 60 * 1000L; // 60분
-    private final long REFRESH_TOKEN_TIME = 3 * 60 * 1000L; // 3분(test)
-    private final long ACCESS_TOKEN_TIME = 60 * 1000L; // 1분(test)
+    private final long REFRESH_TOKEN_TIME = 3*60 * 60 * 1000L; // 3분(test)
+    private final long ACCESS_TOKEN_TIME = 60*60 * 1000L; // 1분(test)
     @Value("${jwt.secret.key}") // Base64 Encode 한 SecretKey
     private String secretKey;
 

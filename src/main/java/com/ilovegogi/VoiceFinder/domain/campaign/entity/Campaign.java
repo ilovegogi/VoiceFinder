@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -73,9 +75,21 @@ public class Campaign {
 
     //todo : 추가 입력 Enum Type
 
+    @Comment("성별")
+    private Gender gender;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "market_id")
     private Market market;
+
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+    private List<CampaignAge> campaignAges = new ArrayList<>();
+
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+    private List<CampaignJob> campaignJobs = new ArrayList<>();
+
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+    private List<CampaignType> campaignTypes = new ArrayList<>();
 
     @Builder
     public Campaign(LocalDateTime applyStartTime, LocalDateTime applyEndTime, LocalDateTime resultAnnouncementTime, LocalDateTime registrationStartTime, LocalDateTime registrationEndTime, String provision, String day, String visitingTime, String reservationDescription, Market market) {
@@ -100,4 +114,9 @@ public class Campaign {
         etcComment = campaignMissionRequestDto.getEtcComment();
         notandum = campaignMissionRequestDto.getNotandum();
     }
+
+    public void registrationCampaignGender(Gender getGender) {
+        gender = getGender;
+    }
+
 }
