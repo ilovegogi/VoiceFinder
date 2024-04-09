@@ -1,9 +1,12 @@
 package com.ilovegogi.VoiceFinder.global.config;
 
 
+import com.ilovegogi.VoiceFinder.domain.user.repository.UserRepository;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtAuthenticationFilter;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtAuthorizationFilter;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtUtil;
+import com.ilovegogi.VoiceFinder.global.oauth2.handler.CustomAuthenticationFailureHandler;
+import com.ilovegogi.VoiceFinder.global.oauth2.handler.CustomAuthenticationSuccessHandler;
 import com.ilovegogi.VoiceFinder.global.oauth2.service.CustomOAuth2UserService;
 import com.ilovegogi.VoiceFinder.global.redis.RedisUtil;
 import com.ilovegogi.VoiceFinder.global.security.UserDetailsServiceImpl;
@@ -34,11 +37,23 @@ import java.util.Arrays;
 public class WebSecurityConfig {
 
     private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
     private final RedisUtil redisUtil;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final ClientRegistrationRepository clientRegistrationRepository;
+
+
+    @Bean
+    public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler(jwtUtil, userRepository);
+    }
+
+    @Bean
+    public CustomAuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -98,9 +113,9 @@ public class WebSecurityConfig {
                 )
                 .oauth2Login(oauth2Login -> oauth2Login
                         .clientRegistrationRepository(clientRegistrationRepository)
-                        .userInfoEndpoint(userInfoEndpoint ->
-                                userInfoEndpoint.userService(customOAuth2UserService)
-                        )
+                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint.userService(customOAuth2UserService))
+                        .successHandler(customAuthenticationSuccessHandler())
+                        .failureHandler(customAuthenticationFailureHandler())
                 );
 
         // 필터 관리
