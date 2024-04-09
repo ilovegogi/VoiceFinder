@@ -1,8 +1,7 @@
 package com.ilovegogi.VoiceFinder.global.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ilovegogi.VoiceFinder.domain.user.entity.UserRoleEnum;
-import com.ilovegogi.VoiceFinder.global.exception.CustomException;
+import com.ilovegogi.VoiceFinder.domain.user.entity.Role;
 import com.ilovegogi.VoiceFinder.global.exception.ErrorCode;
 import com.ilovegogi.VoiceFinder.global.redis.RedisUtil;
 import com.ilovegogi.VoiceFinder.global.response.ApiResponse;
@@ -21,9 +20,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Map;
-
-import static com.ilovegogi.VoiceFinder.global.response.SuccessCode.SUCCESS_USER_LOGIN;
 
 
 @Slf4j(topic = "JWT 검증 및 인가")
@@ -70,7 +66,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             if (jwtUtil.validateToken(storedRefreshToken)) {
                 // Refresh Token이 유효한 경우 새로운 Access Token 발급
                 Long id = Long.parseLong(expiredEx.getClaims().get("identify").toString());
-                UserRoleEnum role = UserRoleEnum.valueOf((String) expiredEx.getClaims().get("auth"));
+                Role role = Role.valueOf((String) expiredEx.getClaims().get("auth"));
                 String newAccessToken = jwtUtil.createAccessToken(id, email, role);
 //                System.out.println("newAccessToken = " + newAccessToken);
                 // 응답 헤더에 새로운 Access Token 추가

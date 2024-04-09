@@ -1,8 +1,8 @@
 package com.ilovegogi.VoiceFinder.global.security;
 
 
+import com.ilovegogi.VoiceFinder.domain.user.entity.Role;
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
-import com.ilovegogi.VoiceFinder.domain.user.entity.UserRoleEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +26,7 @@ public class UserDetailsImpl implements UserDetails {
         return user.getId();
     }
 
-    public UserRoleEnum getRole() {
+    public Role getRole() {
         return user.getRole();
     }
 
@@ -43,7 +43,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        UserRoleEnum role = user.getRole();
+        Role role = user.getRole();
         String authority = role.getAuthority();
 
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);

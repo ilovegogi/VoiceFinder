@@ -1,6 +1,6 @@
 package com.ilovegogi.VoiceFinder.global.jwt;
 
-import com.ilovegogi.VoiceFinder.domain.user.entity.UserRoleEnum;
+import com.ilovegogi.VoiceFinder.domain.user.entity.Role;
 import com.ilovegogi.VoiceFinder.global.redis.RedisUtil;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -55,7 +55,7 @@ public class JwtUtil {
 
 
     // 토큰 생성
-    public String createAccessToken(Long id, String email, UserRoleEnum role) {
+    public String createAccessToken(Long id, String email, Role role) {
         Date date = new Date();
 
         return BEARER_PREFIX +
@@ -69,7 +69,7 @@ public class JwtUtil {
                         .compact();
     }
 
-    public String createRefreshToken(Long id, String email, UserRoleEnum role) {
+    public String createRefreshToken(Long id, String email, Role role) {
         Date date = new Date();
 
         return BEARER_PREFIX +

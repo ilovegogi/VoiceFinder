@@ -50,4 +50,5 @@ public class UserController {
     public UserProfileDto getUserProfile(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return new UserProfileDto(userDetails.getUser());
     }
+
 }
