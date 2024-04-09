@@ -66,11 +66,13 @@ public class CampaignService {
         return new CampaignIdResponseDto(campaign.getId());
     }
 
-    @Transactional
+    //todo : 정적팩토리 메서드로 객체 만들기
+
+    /*@Transactional
     public CampaignIdResponseDto registrationCampaignType(Long marketId, Long campaignId, CampaignTypeRequestDto campaignTypeRequestDto) {
         validateMarketById(marketId);
         Campaign campaign = validateCampaignById(campaignId);
         campaign.registrationCampaignGender(campaignTypeRequestDto.getGender());
 
-    }
+    }*/
 }
