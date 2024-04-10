@@ -5,7 +5,6 @@ import java.util.Map;
 public interface OAuth2UserInfo {
 
     String getProvider();
-    String getId();
     String getEmail();
     String getName();
     String getImageUrl();

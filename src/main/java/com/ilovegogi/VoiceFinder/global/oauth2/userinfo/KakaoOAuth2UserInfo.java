@@ -18,11 +18,6 @@ public class KakaoOAuth2UserInfo implements OAuth2UserInfo {
     }
 
     @Override
-    public String getId() {
-        return attributes.get("id").toString();
-    }
-
-    @Override
     public String getEmail() {
         return (String) kakaoAccount.get("email");
     }

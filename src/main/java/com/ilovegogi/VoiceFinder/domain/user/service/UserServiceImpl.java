@@ -11,6 +11,7 @@ import com.ilovegogi.VoiceFinder.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDto updateUserProfile(User user, UpdateProfileRequestDto requestDto) {
+    public UserProfileDto updateUserProfile(User user, UpdateProfileRequestDto requestDto, String imageUrl) {
         // 기존 비밀번호가 일치하는지 검증
         if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
             throw new CustomException(ErrorCode.NOT_MATCH_PASSWORD);
@@ -65,8 +66,8 @@ public class UserServiceImpl implements UserService {
         if (requestDto.getGender() != null && !requestDto.getGender().trim().isEmpty()) {
             user.setGender(requestDto.getGender());
         }
-        if (requestDto.getImageUrl() != null && !requestDto.getImageUrl().trim().isEmpty()) {
-            user.setImageUrl(requestDto.getImageUrl());
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            user.setImageUrl(imageUrl);
         }
 
         User updatedUser = userRepository.save(user);

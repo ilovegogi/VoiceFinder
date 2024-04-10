@@ -19,7 +19,12 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
+    public final com.ilovegogi.VoiceFinder.global.entity.QTimestamped _super = new com.ilovegogi.VoiceFinder.global.entity.QTimestamped(this);
+
     public final DatePath<java.time.LocalDate> birthDate = createDate("birthDate", java.time.LocalDate.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     public final StringPath email = createString("email");
 
@@ -29,11 +34,12 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath imageUrl = createString("imageUrl");
 
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
+
     public final StringPath password = createString("password");
 
     public final StringPath provider = createString("provider");
-
-    public final StringPath providerId = createString("providerId");
 
     public final EnumPath<Role> role = createEnum("role", Role.class);
 

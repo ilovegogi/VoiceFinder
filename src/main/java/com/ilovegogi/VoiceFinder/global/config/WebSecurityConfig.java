@@ -81,7 +81,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000","http://52.79.190.78"));
+        configuration.setAllowedOrigins(Arrays.asList("http://127.0.0.1:3000","http://localhost:3000","http://52.79.190.78"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")); // 허용할 HTTP 메소드
         configuration.setAllowedHeaders(Arrays.asList("*")); // 모든 헤더 허용
         configuration.setExposedHeaders(Arrays.asList("Authorization, Set-Cookie")); // CORS로 인해 프론트단에서 인식하지 못하는 Authrization 헤더를 노출

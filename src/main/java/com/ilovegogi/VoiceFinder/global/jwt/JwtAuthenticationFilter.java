@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -62,12 +63,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         jwtUtil.storeRefreshToken(user.getEmail(), refreshToken);
 
         // Access Token을 Client에 반환
-        response.addHeader("Authorization", accessToken);
+//        response.addHeader("Authorization", accessToken);
 
-        ApiResponse apiResponse = ApiResponse.of(SUCCESS_USER_LOGIN.getCode(), SUCCESS_USER_LOGIN.getMessage(), user.getEmail());
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(mapper.writeValueAsString(apiResponse));
+        // Access Token을 쿠키에 저장
+        jwtUtil.addJwtToCookie(accessToken, response);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.ilovegogi.VoiceFinder.domain.user.entity;
 import com.ilovegogi.VoiceFinder.global.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -36,7 +37,6 @@ public class User extends Timestamped {
     private Role role;
 
     private String provider;
-    private String providerId;
 
     public User(String email, String password, String username, LocalDate birthDate, String gender, Role role) {
         this.email = email;

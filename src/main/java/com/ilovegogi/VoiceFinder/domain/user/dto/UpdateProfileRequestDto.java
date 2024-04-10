@@ -3,6 +3,7 @@ package com.ilovegogi.VoiceFinder.domain.user.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Getter
@@ -14,6 +15,6 @@ public class UpdateProfileRequestDto {
     private String newPassword;
     private String username;
     private String gender;
-    private String imageUrl;
+    private MultipartFile imageUrl;
 
 }

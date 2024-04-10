@@ -5,13 +5,18 @@ import com.ilovegogi.VoiceFinder.global.redis.RedisUtil;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
@@ -29,10 +34,10 @@ public class JwtUtil {
     // Token 식별자
     public static final String BEARER_PREFIX = "Bearer ";
     // 토큰 만료시간
-//    private final long REFRESH_TOKEN_TIME = 7 * 24 * 60 * 60 * 1000L; // 일주일
-//    private final long ACCESS_TOKEN_TIME = 60 * 60 * 1000L; // 60분
-    private final long REFRESH_TOKEN_TIME = 3 * 60 * 1000L; // 3분(test)
-    private final long ACCESS_TOKEN_TIME = 60 * 1000L; // 1분(test)
+    private final long REFRESH_TOKEN_TIME = 7 * 24 * 60 * 60 * 1000L; // 일주일
+    private final long ACCESS_TOKEN_TIME = 60 * 60 * 1000L; // 60분
+//    private final long REFRESH_TOKEN_TIME = 3 * 60 * 1000L; // 3분(test)
+//    private final long ACCESS_TOKEN_TIME = 60 * 1000L; // 1분(test)
     @Value("${jwt.secret.key}") // Base64 Encode 한 SecretKey
     private String secretKey;
 
@@ -83,9 +88,24 @@ public class JwtUtil {
                         .compact();
     }
 
+    // JWT Cookie 에 저장
+    public void addJwtToCookie(String token, HttpServletResponse res) {
+        try {
+            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20"); // Cookie Value 에는 공백이 불가능해서 encoding 진행
+
+            Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value
+            cookie.setPath("/");
+//            cookie.setHttpOnly(true);
+
+            // Response 객체에 Cookie 추가
+            res.addCookie(cookie);
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.getMessage());
+        }
+    }
 
     public String resolveToken(HttpServletRequest req) {
-        String bearerToken = req.getHeader(AUTHORIZATION_HEADER);
+        String bearerToken = getTokenFromRequest(req);
         if (bearerToken != null && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
@@ -128,5 +148,20 @@ public class JwtUtil {
         }
     }
 
+    public String getTokenFromRequest(HttpServletRequest req) {
+        Cookie[] cookies = req.getCookies();
+        if(cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(AUTHORIZATION_HEADER)) {
+                    try {
+                        return URLDecoder.decode(cookie.getValue(), "UTF-8"); // Encode 되어 넘어간 Value 다시 Decode
+                    } catch (UnsupportedEncodingException e) {
+                        return null;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
 }

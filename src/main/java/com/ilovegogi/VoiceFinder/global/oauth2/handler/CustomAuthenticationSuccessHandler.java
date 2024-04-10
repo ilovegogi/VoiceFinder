@@ -6,6 +6,7 @@ import com.ilovegogi.VoiceFinder.domain.user.entity.User;
 import com.ilovegogi.VoiceFinder.domain.user.repository.UserRepository;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtUtil;
 import com.ilovegogi.VoiceFinder.global.response.ApiResponse;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -34,9 +35,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
-        // providerId를 사용하여 User 객체 조회
-        String providerId = oAuth2User.getAttribute("id");
-        Optional<User> userOptional = userRepository.findByProviderId(providerId); // providerId를 통해 User 객체를 조회하는 메서드
+        // email을 사용하여 User 객체 조회
+        String email = oAuth2User.getAttribute("email");
+        Optional<User> userOptional = userRepository.findByEmail(email);
         User user = userOptional.get();
 
 
@@ -47,12 +48,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         // Refresh Token을 Redis에 저장
         jwtUtil.storeRefreshToken(user.getEmail(), refreshToken);
 
-        // Access Token을 Client에 반환
-        response.addHeader("Authorization", accessToken);
+        // Access Token을 쿠키에 저장
+        jwtUtil.addJwtToCookie(accessToken, response);
 
-        ApiResponse apiResponse = ApiResponse.of(SUCCESS_USER_LOGIN.getCode(), SUCCESS_USER_LOGIN.getMessage(), user.getEmail());
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(mapper.writeValueAsString(apiResponse));
+
+        // 리다이렉션 (클라이언트의 홈 페이지로)
+        response.sendRedirect("http://localhost:3000/");
     }
 }
