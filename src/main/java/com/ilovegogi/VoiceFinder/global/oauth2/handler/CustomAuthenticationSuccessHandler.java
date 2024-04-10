@@ -5,6 +5,8 @@ import com.ilovegogi.VoiceFinder.domain.user.entity.Role;
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
 import com.ilovegogi.VoiceFinder.domain.user.repository.UserRepository;
 import com.ilovegogi.VoiceFinder.global.jwt.JwtUtil;
+import com.ilovegogi.VoiceFinder.global.oauth2.userinfo.OAuth2UserInfo;
+import com.ilovegogi.VoiceFinder.global.oauth2.userinfo.OAuth2UserInfoFactory;
 import com.ilovegogi.VoiceFinder.global.response.ApiResponse;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
@@ -33,10 +35,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
-        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        OAuth2User oAuth2User = oauthToken.getPrincipal();
+
+        // OAuth2UserInfoFactory를 사용하여 OAuth2UserInfo 객체 생성
+        OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(oauthToken.getAuthorizedClientRegistrationId(), oAuth2User.getAttributes());
 
         // email을 사용하여 User 객체 조회
-        String email = oAuth2User.getAttribute("email");
+        String email = userInfo.getEmail();
         Optional<User> userOptional = userRepository.findByEmail(email);
         User user = userOptional.get();
 
