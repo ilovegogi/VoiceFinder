@@ -11,9 +11,9 @@ public class UpdateProfileRequestDto {
 
     @NotBlank
     private String password;
-    @NotBlank
     private String newPassword;
     private String username;
     private String gender;
+    private String imageUrl;
 
 }

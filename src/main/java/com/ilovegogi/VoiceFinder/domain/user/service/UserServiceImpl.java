@@ -65,6 +65,9 @@ public class UserServiceImpl implements UserService {
         if (requestDto.getGender() != null && !requestDto.getGender().trim().isEmpty()) {
             user.setGender(requestDto.getGender());
         }
+        if (requestDto.getImageUrl() != null && !requestDto.getImageUrl().trim().isEmpty()) {
+            user.setImageUrl(requestDto.getImageUrl());
+        }
 
         User updatedUser = userRepository.save(user);
         return new UserProfileDto(updatedUser);

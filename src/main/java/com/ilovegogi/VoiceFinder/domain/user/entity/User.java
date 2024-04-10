@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.user.entity;
 
+import com.ilovegogi.VoiceFinder.global.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User {
+public class User extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
