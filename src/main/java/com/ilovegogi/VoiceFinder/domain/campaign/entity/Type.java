@@ -23,4 +23,12 @@ public class Type {
 
     private String type;
 
+    public Type(String type) {
+        this.type = type;
+    }
+
+    public static Type from(String type) {
+        return new Type(type);
+    }
+
 }

@@ -23,4 +23,11 @@ public class Job {
 
     private String job;
 
+    public Job(String job) {
+        this.job = job;
+    }
+
+    public static Job from(String job) {
+        return new Job(job);
+    }
 }

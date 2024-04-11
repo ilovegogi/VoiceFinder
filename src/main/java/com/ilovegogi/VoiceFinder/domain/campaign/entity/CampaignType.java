@@ -2,6 +2,7 @@ package com.ilovegogi.VoiceFinder.domain.campaign.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,9 @@ public class CampaignType {
     @JoinColumn(name = "type_id")
     private Type type;
 
+    @Builder
+    public CampaignType(Campaign campaign, Type type) {
+        this.campaign = campaign;
+        this.type = type;
+    }
 }

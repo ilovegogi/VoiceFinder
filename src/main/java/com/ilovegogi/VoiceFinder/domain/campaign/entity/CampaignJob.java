@@ -2,6 +2,7 @@ package com.ilovegogi.VoiceFinder.domain.campaign.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,9 @@ public class CampaignJob {
     @JoinColumn(name = "job_id")
     private Job job;
 
+    @Builder
+    public CampaignJob(Campaign campaign, Job job) {
+        this.campaign = campaign;
+        this.job = job;
+    }
 }

@@ -5,15 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CampaignTypeRequestDto<T> {
+public class CampaignTypeRequestDto {
 
     private Gender gender;
-
-    private T age;
-    private T job;
-    private T type;
+    private List<String> age;
+    private List<String> job;
+    private List<String> type;
 
 }

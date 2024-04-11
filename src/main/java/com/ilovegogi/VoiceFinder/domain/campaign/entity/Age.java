@@ -23,5 +23,12 @@ public class Age {
 
     private String age;
 
+    public Age(String age) {
+        this.age = age;
+    }
+
+    public static Age from(String age) {
+        return new Age(age);
+    }
 
 }
