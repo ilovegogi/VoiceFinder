@@ -3,14 +3,15 @@ package com.ilovegogi.VoiceFinder.domain.user.service;
 import com.ilovegogi.VoiceFinder.domain.user.dto.SignupRequestDto;
 import com.ilovegogi.VoiceFinder.domain.user.dto.UpdateProfileRequestDto;
 import com.ilovegogi.VoiceFinder.domain.user.dto.UserProfileDto;
+import com.ilovegogi.VoiceFinder.domain.user.entity.Role;
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
-import com.ilovegogi.VoiceFinder.domain.user.entity.UserRoleEnum;
 import com.ilovegogi.VoiceFinder.domain.user.repository.UserRepository;
 import com.ilovegogi.VoiceFinder.global.exception.CustomException;
 import com.ilovegogi.VoiceFinder.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -34,12 +35,12 @@ public class UserServiceImpl implements UserService {
         }
 
         // 사용자 ROLE 확인
-        UserRoleEnum role = UserRoleEnum.USER;
+        Role role = Role.USER;
         if (requestDto.isAdmin()) {
             if (!ADMIN_TOKEN.equals(requestDto.getAdminToken())) {
                 throw new CustomException(ErrorCode.INVALID_ADMIN_TOKEN);
             }
-            role = UserRoleEnum.ADMIN;
+            role = Role.ADMIN;
         }
 
         // 사용자 등록
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDto updateUserProfile(User user, UpdateProfileRequestDto requestDto) {
+    public UserProfileDto updateUserProfile(User user, UpdateProfileRequestDto requestDto, String imageUrl) {
         // 기존 비밀번호가 일치하는지 검증
         if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
             throw new CustomException(ErrorCode.NOT_MATCH_PASSWORD);
@@ -64,6 +65,9 @@ public class UserServiceImpl implements UserService {
         }
         if (requestDto.getGender() != null && !requestDto.getGender().trim().isEmpty()) {
             user.setGender(requestDto.getGender());
+        }
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            user.setImageUrl(imageUrl);
         }
 
         User updatedUser = userRepository.save(user);
