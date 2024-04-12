@@ -1,10 +1,16 @@
 package com.ilovegogi.VoiceFinder.domain.market.entity;
 
+import com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign;
 import com.ilovegogi.VoiceFinder.domain.user.entity.Address;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,10 +24,32 @@ public class Market {
 
     private Category category;
 
+    private Long ownerId;
+
     @Embedded
-    private Address location;
+    private Address address;
 
     private String name;
 
+    @Comment("가게 한 줄 소개")
     private String description;
+
+    @Comment("오시는 길")
+    private String wayDescription;
+
+    //todo: 이미지 작업 + 위도 경도
+
+
+    @OneToMany(mappedBy = "market",cascade = CascadeType.ALL)
+    private List<Campaign> campaigns = new ArrayList<>();
+
+    @Builder
+    public Market(Category category, Long ownerId, Address address, String name, String description, String wayDescription) {
+        this.category = category;
+        this.ownerId = ownerId;
+        this.address = address;
+        this.name = name;
+        this.description = description;
+        this.wayDescription = wayDescription;
+    }
 }
