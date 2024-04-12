@@ -109,7 +109,7 @@ public class Campaign {
         keyword = campaignMissionRequestDto.getKeyword();
         additionalKeyword = campaignMissionRequestDto.getAdditionalKeyword();
         minTextNum = campaignMissionRequestDto.getMinTextNum();
-        minImageNum = campaignMissionRequestDto.getMinTextNum();
+        minImageNum = campaignMissionRequestDto.getMinImageNum();
         isMap = campaignMissionRequestDto.getIsMap();
         etcComment = campaignMissionRequestDto.getEtcComment();
         notandum = campaignMissionRequestDto.getNotandum();

@@ -22,15 +22,21 @@ public class QMarket extends EntityPathBase<Market> {
 
     public static final QMarket market = new QMarket("market");
 
+    public final com.ilovegogi.VoiceFinder.domain.user.entity.QAddress address;
+
+    public final ListPath<com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign, com.ilovegogi.VoiceFinder.domain.campaign.entity.QCampaign> campaigns = this.<com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign, com.ilovegogi.VoiceFinder.domain.campaign.entity.QCampaign>createList("campaigns", com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign.class, com.ilovegogi.VoiceFinder.domain.campaign.entity.QCampaign.class, PathInits.DIRECT2);
+
     public final EnumPath<Category> category = createEnum("category", Category.class);
 
     public final StringPath description = createString("description");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final com.ilovegogi.VoiceFinder.domain.user.entity.QAddress location;
-
     public final StringPath name = createString("name");
+
+    public final NumberPath<Long> ownerId = createNumber("ownerId", Long.class);
+
+    public final StringPath wayDescription = createString("wayDescription");
 
     public QMarket(String variable) {
         this(Market.class, forVariable(variable), INITS);
@@ -50,7 +56,7 @@ public class QMarket extends EntityPathBase<Market> {
 
     public QMarket(Class<? extends Market> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.location = inits.isInitialized("location") ? new com.ilovegogi.VoiceFinder.domain.user.entity.QAddress(forProperty("location")) : null;
+        this.address = inits.isInitialized("address") ? new com.ilovegogi.VoiceFinder.domain.user.entity.QAddress(forProperty("address")) : null;
     }
 
 }

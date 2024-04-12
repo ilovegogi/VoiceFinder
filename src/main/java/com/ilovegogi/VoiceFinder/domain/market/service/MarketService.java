@@ -38,7 +38,7 @@ public class MarketService {
                 .wayDescription(marketRegistrationRequestDto.getWayDescription())
                 .build();
         marketRepository.save(market);
-        return new MarketRegistrationResponseDto(market.getOwnerId());
+        return new MarketRegistrationResponseDto(market.getId());
     }
 
     private void validateMarketExist(String name, Long ownerId) {

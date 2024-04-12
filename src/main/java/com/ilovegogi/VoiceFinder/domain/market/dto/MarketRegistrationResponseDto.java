@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MarketRegistrationResponseDto {
 
-    private Long ownerId;
+    private Long id;
 
 }
