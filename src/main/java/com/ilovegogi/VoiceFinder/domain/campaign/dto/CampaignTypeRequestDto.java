@@ -12,6 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class CampaignTypeRequestDto {
 
+    private Long marketId;
+
     private Gender gender;
     private List<String> age;
     private List<String> job;

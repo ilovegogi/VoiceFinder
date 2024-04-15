@@ -11,6 +11,8 @@ import org.hibernate.annotations.Comment;
 @NoArgsConstructor
 public class CampaignMissionRequestDto {
 
+    private Long marketId;
+
     private String keyword;
     private String additionalKeyword;
     private int minTextNum;
