@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CampaignTimeVisitInfoRequestDto {
 
+    private Long marketId;
+
     private LocalDateTime applyStartTime;
     private LocalDateTime applyEndTime;
     private LocalDateTime resultAnnouncementTime;
