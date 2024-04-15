@@ -7,7 +7,11 @@ public class NaverOAuth2UserInfo implements OAuth2UserInfo {
 
     public NaverOAuth2UserInfo(Map<String, Object> attributes) {
         // 'response' 키 아래 있는 사용자 정보를 저장
-        this.attributes = (Map<String, Object>) attributes.get("response");
+        if (attributes.containsKey("response")) {
+            this.attributes = (Map<String, Object>) attributes.get("response");
+        } else {
+            this.attributes = attributes;
+        }
     }
 
     @Override
