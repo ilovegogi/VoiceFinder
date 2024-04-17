@@ -1,32 +1,35 @@
-package com.ilovegogi.VoiceFinder.domain.campaign.entity;
+package com.ilovegogi.VoiceFinder.domain.reviewer.entity;
 
+import com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign;
+import com.ilovegogi.VoiceFinder.domain.campaign.entity.Type;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "campaignType")
-public class CampaignType {
+@Table(name = "reviewerType")
+public class ReviewerType {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "campaignType_id")
+    @Column(name = "reviewerType_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "campaign_id")
-    private Campaign campaign;
+    @JoinColumn(name = "reviewer_id")
+    private Reviewer reviewer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
     private Type type;
 
     @Builder
-    public CampaignType(Campaign campaign, Type type) {
-        this.campaign = campaign;
+    public ReviewerType(Reviewer reviewer, Type type) {
+        this.reviewer = reviewer;
         this.type = type;
     }
+
 }

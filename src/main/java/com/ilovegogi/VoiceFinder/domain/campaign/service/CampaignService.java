@@ -76,6 +76,7 @@ public class CampaignService {
         validateMarketById(marketId);
         Campaign campaign = validateCampaignById(campaignId);
         campaign.registrationCampaignGender(campaignTypeRequestDto.getGender());
+        campaignRepository.save(campaign);
         List<Age> ageList = validateAgeExistAndCreate(campaignTypeRequestDto.getAge());
         for (Age age : ageList) {
             CampaignAge campaignAge = CampaignAge.builder()
@@ -104,31 +105,31 @@ public class CampaignService {
     }
 
     private List<Age> validateAgeExistAndCreate(List<String> ages) {
-        List<Age> ageList = new ArrayList<>(); //Age 객체 리스트
+        List<Age> ageList = new ArrayList<>();
         for (String age : ages) {
             Age getAge = ageRepository.findByAge(age)
                     .orElseGet(() -> createAge(age));
-            ageList.add(getAge); //age 객체 추가
+            ageList.add(getAge);
         }
         return ageList;
     }
 
     private List<Job> validateJobExistAndCreate(List<String> jobs) {
-        List<Job> jobList = new ArrayList<>(); //Age 객체 리스트
+        List<Job> jobList = new ArrayList<>();
         for (String job : jobs) {
             Job getJob = jobRepository.findByJob(job)
                     .orElseGet(() -> createJob(job));
-            jobList.add(getJob); //age 객체 추가
+            jobList.add(getJob);
         }
         return jobList;
     }
 
     private List<Type> validateTypeExistAndCreate(List<String> types) {
-        List<Type> typeList = new ArrayList<>(); //Age 객체 리스트
+        List<Type> typeList = new ArrayList<>();
         for (String type : types) {
             Type getType = typeRepository.findByType(type)
                     .orElseGet(() -> createType(type));
-            typeList.add(getType); //age 객체 추가
+            typeList.add(getType);
         }
         return typeList;
     }

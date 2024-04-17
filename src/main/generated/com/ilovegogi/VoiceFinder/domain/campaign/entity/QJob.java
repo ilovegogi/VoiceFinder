@@ -18,6 +18,8 @@ public class QJob extends EntityPathBase<Job> {
 
     private static final long serialVersionUID = -968568942L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QJob job1 = new QJob("job1");
 
     public final ListPath<CampaignJob, QCampaignJob> campaignJobs = this.<CampaignJob, QCampaignJob>createList("campaignJobs", CampaignJob.class, QCampaignJob.class, PathInits.DIRECT2);
@@ -26,16 +28,27 @@ public class QJob extends EntityPathBase<Job> {
 
     public final StringPath job = createString("job");
 
+    public final com.ilovegogi.VoiceFinder.domain.reviewer.entity.QReviewer reviewer;
+
     public QJob(String variable) {
-        super(Job.class, forVariable(variable));
+        this(Job.class, forVariable(variable), INITS);
     }
 
     public QJob(Path<? extends Job> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QJob(PathMetadata metadata) {
-        super(Job.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QJob(PathMetadata metadata, PathInits inits) {
+        this(Job.class, metadata, inits);
+    }
+
+    public QJob(Class<? extends Job> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.reviewer = inits.isInitialized("reviewer") ? new com.ilovegogi.VoiceFinder.domain.reviewer.entity.QReviewer(forProperty("reviewer"), inits.get("reviewer")) : null;
     }
 
 }

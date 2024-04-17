@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 public class UserProfileDto {
+    Long userId;
     String username;
     String email;
     String imageUrl;
@@ -19,6 +20,7 @@ public class UserProfileDto {
     Role role;
 
     public UserProfileDto(User user) {
+        this.userId = user.getId();
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.imageUrl = user.getImageUrl();

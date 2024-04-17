@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.campaign.entity;
 
+import com.ilovegogi.VoiceFinder.domain.reviewer.entity.Reviewer;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,8 +19,11 @@ public class Job {
     @Column(name = "job_id")
     private Long id;
 
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "job")
     private List<CampaignJob> campaignJobs = new ArrayList<>();
+
+    @OneToOne(mappedBy = "job", fetch = FetchType.LAZY)
+    private Reviewer reviewer;
 
     private String job;
 

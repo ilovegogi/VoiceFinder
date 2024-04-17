@@ -47,7 +47,7 @@ public class QCampaignJob extends EntityPathBase<CampaignJob> {
     public QCampaignJob(Class<? extends CampaignJob> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.campaign = inits.isInitialized("campaign") ? new QCampaign(forProperty("campaign"), inits.get("campaign")) : null;
-        this.job = inits.isInitialized("job") ? new QJob(forProperty("job")) : null;
+        this.job = inits.isInitialized("job") ? new QJob(forProperty("job"), inits.get("job")) : null;
     }
 
 }

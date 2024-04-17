@@ -24,6 +24,8 @@ public class QType extends EntityPathBase<Type> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final ListPath<com.ilovegogi.VoiceFinder.domain.reviewer.entity.ReviewerType, com.ilovegogi.VoiceFinder.domain.reviewer.entity.QReviewerType> reviewerTypes = this.<com.ilovegogi.VoiceFinder.domain.reviewer.entity.ReviewerType, com.ilovegogi.VoiceFinder.domain.reviewer.entity.QReviewerType>createList("reviewerTypes", com.ilovegogi.VoiceFinder.domain.reviewer.entity.ReviewerType.class, com.ilovegogi.VoiceFinder.domain.reviewer.entity.QReviewerType.class, PathInits.DIRECT2);
+
     public final StringPath type = createString("type");
 
     public QType(String variable) {
