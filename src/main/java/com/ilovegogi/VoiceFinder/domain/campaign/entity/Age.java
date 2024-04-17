@@ -18,7 +18,7 @@ public class Age {
     @Column(name = "age_id")
     private Long id;
 
-    @OneToMany(mappedBy = "age", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "age")
     private List<CampaignAge> campaignAges = new ArrayList<>();
 
     private String age;

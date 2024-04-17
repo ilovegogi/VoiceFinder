@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.user.entity;
 
+import com.ilovegogi.VoiceFinder.domain.reviewer.entity.Reviewer;
 import com.ilovegogi.VoiceFinder.global.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,11 +14,16 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Table(name = "user")
 public class User extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Reviewer reviewer;
+
     @Column(nullable = false, unique = true)
     private String email;
 
