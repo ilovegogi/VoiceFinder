@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "reviewerActiveAddress")
-public class ReviewerActiveAddress {
+@Table(name = "reviewerType")
+public class ReviewerType {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reviewerActiveAddress_id")
+    @Column(name = "reviewerType_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,13 +23,13 @@ public class ReviewerActiveAddress {
     private Reviewer reviewer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activeAddress_id")
-    private ActiveAddress activeAddress;
+    @JoinColumn(name = "type_id")
+    private Type type;
 
     @Builder
-    public ReviewerActiveAddress(Reviewer reviewer, ActiveAddress activeAddress) {
+    public ReviewerType(Reviewer reviewer, Type type) {
         this.reviewer = reviewer;
-        this.activeAddress = activeAddress;
+        this.type = type;
     }
 
 }

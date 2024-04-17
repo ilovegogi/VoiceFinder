@@ -20,6 +20,11 @@ public enum SuccessCode {
     SUCCESS_GET_USER_POINT(HttpStatus.OK, "U00501", "회원 포인트 조회에 성공했습니다."),
     SUCCESS_DELETE_USER(HttpStatus.OK, "U00600", "회원 탈퇴에 성공했습니다."),
 
+
+    /* REVIEWER */
+    SUCCESS_REVIEWER_SIGN_UP(HttpStatus.CREATED, "R00000", "리뷰어 회원 등록에 성공했습니다."),
+
+
     /* GOODS */
     SUCCESS_GET_ALL_GOODS_INFO(HttpStatus.OK, "G00000", "공연 정보 전체 조회 성공했습니다."),
     SUCCESS_GET_SLICE_GOODS(HttpStatus.OK, "G00100", "공연 페이징 조회 성공했습니다."),

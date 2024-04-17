@@ -1,6 +1,7 @@
 package com.ilovegogi.VoiceFinder.domain.campaign.entity;
 
 import com.ilovegogi.VoiceFinder.domain.reviewer.entity.Reviewer;
+import com.ilovegogi.VoiceFinder.domain.reviewer.entity.ReviewerType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,9 +23,8 @@ public class Type {
     @OneToMany(mappedBy = "type")
     private List<CampaignType> campaignTypes = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reviewer_id")
-    private Reviewer reviewer;
+    @OneToMany(mappedBy = "type")
+    private List<ReviewerType> reviewerTypes = new ArrayList<>();
 
     private String type;
 

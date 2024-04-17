@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.reviewer.entity;
 
+import com.ilovegogi.VoiceFinder.domain.campaign.entity.Type;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,5 +21,15 @@ public class ActiveAddress {
 
     @OneToMany(mappedBy = "activeAddress")
     private List<ReviewerActiveAddress> reviewerActiveAddresses = new ArrayList<>();
+
+    private String activeAddress;
+
+    public ActiveAddress(String activeAddress) {
+        this.activeAddress = activeAddress;
+    }
+
+    public static ActiveAddress from(String activeAddress) {
+        return new ActiveAddress(activeAddress);
+    }
 
 }

@@ -108,7 +108,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메소드 허용
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                         .requestMatchers("/").permitAll() // 메인 페이지 요청 허가
-                        .requestMatchers("/api/users/login","/api/users/signup","/api/users/kakao/**","/api/users/naver/**").permitAll()
+                        .requestMatchers("/api/users/login","/api/users/signup","/api/users/kakao/**","/api/users/naver/**","/api/reviewer/signup").permitAll()
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
                 )
                 .oauth2Login(oauth2Login -> oauth2Login
