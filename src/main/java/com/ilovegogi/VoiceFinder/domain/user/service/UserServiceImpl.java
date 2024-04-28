@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // 사용자 등록
-        User user = new User(email, password, requestDto.getUsername(), requestDto.getBirthDate(), requestDto.getGender(), role);
+        User user = new User(email, password, requestDto.getUsername(), requestDto.getBirthDate(), requestDto.getGender(), role, requestDto.getUserRole());
         userRepository.save(user);
 
         return new UserProfileDto(user);

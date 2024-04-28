@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.user.dto;
 
+import com.ilovegogi.VoiceFinder.domain.user.entity.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class SignupRequestDto {
     private String gender;
     private boolean admin = false;
     private String adminToken = "";
+    private UserRole userRole;
 
 
 }

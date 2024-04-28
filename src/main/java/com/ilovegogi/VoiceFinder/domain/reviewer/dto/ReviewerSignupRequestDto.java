@@ -15,6 +15,8 @@ public class ReviewerSignupRequestDto {
     private String blogUrl;
     private String selfDescription;
     private String job;
+    private Boolean reviewerClause1;
+    private Boolean reviewerClause2;
     private List<String> type;
     private List<String> activeAddress;
 
