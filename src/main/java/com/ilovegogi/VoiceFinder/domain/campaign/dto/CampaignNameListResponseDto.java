@@ -7,11 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CampaignVisitInfoRequestDto {
+public class CampaignNameListResponseDto {
 
-    private String provision;
-    private String day;
-    private String visitingTime;
-    private String reservationDescription;
-
+    private Long campaignId;
+    private String campaignName;
 }

@@ -1,10 +1,8 @@
 package com.ilovegogi.VoiceFinder.domain.campaign.controller;
 
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignMissionRequestDto;
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignTimeVisitInfoRequestDto;
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignIdResponseDto;
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignTypeRequestDto;
+import com.ilovegogi.VoiceFinder.domain.campaign.dto.*;
 import com.ilovegogi.VoiceFinder.domain.campaign.service.CampaignService;
+import com.ilovegogi.VoiceFinder.domain.market.dto.MarketResponseDto;
 import com.ilovegogi.VoiceFinder.global.response.ApiResponse;
 import com.ilovegogi.VoiceFinder.global.response.SuccessCode;
 import jakarta.validation.Valid;
@@ -39,11 +37,35 @@ public class CampaignController {
     }
 
     @PostMapping("/{campaignId}/type")
-    public ResponseEntity<ApiResponse> registrationCampaignType(@PathVariable Long campaignId, @Valid @RequestBody CampaignTypeRequestDto campaignTypeRequestDto) {
+    public ResponseEntity<ApiResponse> registrationCampaignType(@PathVariable("campaignId") Long campaignId, @Valid @RequestBody CampaignTypeRequestDto campaignTypeRequestDto) {
         CampaignIdResponseDto campaignIdResponseDto = campaignService.registrationCampaignType(campaignTypeRequestDto.getMarketId(), campaignId, campaignTypeRequestDto);
         SuccessCode successCode = SuccessCode.SUCCESS_CAMPAIGN_CREATE;
         return ResponseEntity.status(successCode.getHttpStatus())
                 .body(ApiResponse.of(successCode.getCode(),successCode.getMessage(), campaignIdResponseDto));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<ApiResponse> getCampaignList() {
+        CampaignResponseDto campaignResponseDto = campaignService.getCampaignList();
+        SuccessCode successCode = SuccessCode.SUCCESS_GET_ALL_CAMPAIGN;
+        return ResponseEntity.status(successCode.getHttpStatus())
+                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignResponseDto));
+    }
+
+    @GetMapping("/{campaignId}")
+    public ResponseEntity<ApiResponse> getCampaignById(@PathVariable("campaignId") Long campaignId) {
+        CampaignListResponseDto campaignListResponseDto = campaignService.getCampaignById(campaignId);
+        SuccessCode successCode = SuccessCode.SUCCESS_GET_CAMPAIGN;
+        return ResponseEntity.status(successCode.getHttpStatus())
+                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignListResponseDto));
+    }
+
+    @GetMapping("/list/name")
+    public ResponseEntity<ApiResponse> getCampaignNameList() {
+        CampaignResponseDto campaignResponseDto = campaignService.getCampaignNameList();
+        SuccessCode successCode = SuccessCode.SUCCESS_GET_CAMPAIGN_NAMES;
+        return ResponseEntity.status(successCode.getHttpStatus())
+                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignResponseDto));
     }
 
 }
