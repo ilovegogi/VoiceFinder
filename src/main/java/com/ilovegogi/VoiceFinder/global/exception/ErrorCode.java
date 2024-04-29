@@ -29,6 +29,9 @@ public enum ErrorCode {
     EXISTED_MARKET(HttpStatus.CONFLICT, "M10100", "이미 등록된 매장입니다."),
     NOT_FOUND_MARKET(HttpStatus.NOT_FOUND, "M10000", "해당하는 매장을 찾지 못했습니다."),
 
+    /* BUSINESS */
+    FILE_UPLOAD_EXCEPTION(HttpStatus.BAD_REQUEST, "B10100", "파일 업로드에 실패했습니다."),
+
 
     /* CAMPAIGNS */
     ALREADY_ENDED_CAMPAIGN(HttpStatus.CONFLICT, "C10000", "이미 종료된 캠페인입니다."),
