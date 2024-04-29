@@ -159,15 +159,15 @@ public class CampaignService {
     }
 
 
-    public CampaignResponseDto getCampaignNameList() {
+    public List<CampaignNameListResponseDto> getCampaignNameList() {
         List<Campaign> campaigns = campaignRepository.findAll();
         List<CampaignNameListResponseDto> list = campaigns.stream()
                 .map(c -> new CampaignNameListResponseDto(c.getId(), c.getCampaignName()))
                 .collect(Collectors.toList());
-        return new CampaignResponseDto(list);
+        return list;
     }
 
-    public CampaignResponseDto getCampaignList() {
+    public List<CampaignListResponseDto> getCampaignList() {
         List<Campaign> campaigns = campaignRepository.findAllWithAges();
         List<CampaignListResponseDto> list = campaigns.stream()
                 .map(c -> {
@@ -183,7 +183,7 @@ public class CampaignService {
                     return new CampaignListResponseDto(c.getId(), c.getMarket().getName(), c.getCampaignName(), c.getApplyStartTime(), c.getApplyEndTime(), c.getResultAnnouncementTime(), c.getRegistrationStartTime(), c.getRegistrationEndTime(), c.getProvision(), c.getDay(), c.getVisitingTime(), c.getReservationDescription(), c.getKeyword(), c.getAdditionalKeyword(), c.getMinTextNum(), c.getMinImageNum(), c.getIsMap(), c.getEtcComment(), c.getNotandum(), c.getGender(), ages, jobs, types);
                 })
                 .collect(Collectors.toList());
-        return new CampaignResponseDto(list);
+        return list;
     }
 
     public CampaignListResponseDto getCampaignById(Long id) {

@@ -28,7 +28,7 @@ public class QBusiness extends EntityPathBase<Business> {
 
     public final BooleanPath bizClause2 = createBoolean("bizClause2");
 
-    public final StringPath bizFile = createString("bizFile");
+    public final StringPath bizFileUrl = createString("bizFileUrl");
 
     public final StringPath bizName = createString("bizName");
 

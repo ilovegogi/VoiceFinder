@@ -49,11 +49,11 @@ public class MarketService {
     }
 
 
-    public MarketResponseDto getMarketList() {
+    public List<MarketListResponseDto> getMarketList() {
         List<Market> markets = marketRepository.findAll();
         List<MarketListResponseDto> list = markets.stream()
                 .map(m -> new MarketListResponseDto(m.getId(), m.getCategory(), m.getOwnerId(), m.getAddress(), m.getName(), m.getDescription(), m.getWayDescription()))
                 .collect(Collectors.toList());
-        return new MarketResponseDto(list);
+        return list;
     }
 }

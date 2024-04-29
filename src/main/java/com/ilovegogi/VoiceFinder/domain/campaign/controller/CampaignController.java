@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -46,10 +48,10 @@ public class CampaignController {
 
     @GetMapping("/list")
     public ResponseEntity<ApiResponse> getCampaignList() {
-        CampaignResponseDto campaignResponseDto = campaignService.getCampaignList();
+        List<CampaignListResponseDto> campaignListResponseDtos = campaignService.getCampaignList();
         SuccessCode successCode = SuccessCode.SUCCESS_GET_ALL_CAMPAIGN;
         return ResponseEntity.status(successCode.getHttpStatus())
-                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignResponseDto));
+                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignListResponseDtos));
     }
 
     @GetMapping("/{campaignId}")
@@ -62,10 +64,10 @@ public class CampaignController {
 
     @GetMapping("/list/name")
     public ResponseEntity<ApiResponse> getCampaignNameList() {
-        CampaignResponseDto campaignResponseDto = campaignService.getCampaignNameList();
+        List<CampaignNameListResponseDto> campaignNameListResponseDtos = campaignService.getCampaignNameList();
         SuccessCode successCode = SuccessCode.SUCCESS_GET_CAMPAIGN_NAMES;
         return ResponseEntity.status(successCode.getHttpStatus())
-                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignResponseDto));
+                .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), campaignNameListResponseDtos));
     }
 
 }
