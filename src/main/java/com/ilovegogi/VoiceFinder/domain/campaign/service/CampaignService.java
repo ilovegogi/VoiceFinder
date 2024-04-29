@@ -1,9 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.campaign.service;
 
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignMissionRequestDto;
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignTimeVisitInfoRequestDto;
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignIdResponseDto;
-import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignTypeRequestDto;
+import com.ilovegogi.VoiceFinder.domain.campaign.dto.*;
 import com.ilovegogi.VoiceFinder.domain.campaign.entity.*;
 import com.ilovegogi.VoiceFinder.domain.campaign.repository.*;
 import com.ilovegogi.VoiceFinder.domain.market.entity.Market;
@@ -17,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -37,6 +35,7 @@ public class CampaignService {
     public CampaignIdResponseDto registrationCampaignTimeVisitInfo(Long marketId, CampaignTimeVisitInfoRequestDto campaignTimeVisitInfoRequestDto) {
         Market market = validateMarketById(marketId);
         Campaign campaign = Campaign.builder()
+                .campaignName(campaignTimeVisitInfoRequestDto.getCampaignName())
                 .applyStartTime(campaignTimeVisitInfoRequestDto.getApplyStartTime())
                 .applyEndTime(campaignTimeVisitInfoRequestDto.getApplyEndTime())
                 .resultAnnouncementTime(campaignTimeVisitInfoRequestDto.getResultAnnouncementTime())
@@ -50,6 +49,13 @@ public class CampaignService {
                 .build();
         campaignRepository.save(campaign);
         return new CampaignIdResponseDto(campaign.getId());
+    }
+
+    private void validateCampaignExist(Long campaignId) {
+        campaignRepository.findById(campaignId)
+                .ifPresent(exist -> {
+                    throw new CustomException(ErrorCode.EXISTED_MARKET);
+                });
     }
 
     private Market validateMarketById(Long marketId) {
@@ -151,5 +157,49 @@ public class CampaignService {
         typeRepository.save(createType);
         return createType;
     }
+
+
+    public CampaignResponseDto getCampaignNameList() {
+        List<Campaign> campaigns = campaignRepository.findAll();
+        List<CampaignNameListResponseDto> list = campaigns.stream()
+                .map(c -> new CampaignNameListResponseDto(c.getId(), c.getCampaignName()))
+                .collect(Collectors.toList());
+        return new CampaignResponseDto(list);
+    }
+
+    public CampaignResponseDto getCampaignList() {
+        List<Campaign> campaigns = campaignRepository.findAllWithAges();
+        List<CampaignListResponseDto> list = campaigns.stream()
+                .map(c -> {
+                    List<String> ages = c.getCampaignAges().stream()
+                            .map(campaignAge -> campaignAge.getAge().getAge())
+                            .collect(Collectors.toList());
+                    List<String> jobs = c.getCampaignJobs().stream()
+                            .map(campaignJob -> campaignJob.getJob().getJob())
+                            .collect(Collectors.toList());
+                    List<String> types = c.getCampaignTypes().stream()
+                            .map(campaignType -> campaignType.getType().getType())
+                            .collect(Collectors.toList());
+                    return new CampaignListResponseDto(c.getId(), c.getMarket().getName(), c.getCampaignName(), c.getApplyStartTime(), c.getApplyEndTime(), c.getResultAnnouncementTime(), c.getRegistrationStartTime(), c.getRegistrationEndTime(), c.getProvision(), c.getDay(), c.getVisitingTime(), c.getReservationDescription(), c.getKeyword(), c.getAdditionalKeyword(), c.getMinTextNum(), c.getMinImageNum(), c.getIsMap(), c.getEtcComment(), c.getNotandum(), c.getGender(), ages, jobs, types);
+                })
+                .collect(Collectors.toList());
+        return new CampaignResponseDto(list);
+    }
+
+    public CampaignListResponseDto getCampaignById(Long id) {
+        Campaign c = validateCampaignById(id);
+        List<String> ages = c.getCampaignAges().stream()
+                .map(campaignAge -> campaignAge.getAge().getAge())
+                .collect(Collectors.toList());
+        List<String> jobs = c.getCampaignJobs().stream()
+                .map(campaignJob -> campaignJob.getJob().getJob())
+                .collect(Collectors.toList());
+        List<String> types = c.getCampaignTypes().stream()
+                .map(campaignType -> campaignType.getType().getType())
+                .collect(Collectors.toList());
+        return new CampaignListResponseDto(c.getId(), c.getMarket().getName(), c.getCampaignName(), c.getApplyStartTime(), c.getApplyEndTime(), c.getResultAnnouncementTime(), c.getRegistrationStartTime(), c.getRegistrationEndTime(), c.getProvision(), c.getDay(), c.getVisitingTime(), c.getReservationDescription(), c.getKeyword(), c.getAdditionalKeyword(), c.getMinTextNum(), c.getMinImageNum(), c.getIsMap(), c.getEtcComment(), c.getNotandum(), c.getGender(), ages, jobs, types);
+
+    }
+
 
 }

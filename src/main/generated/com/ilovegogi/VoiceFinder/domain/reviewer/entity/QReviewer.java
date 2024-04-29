@@ -38,6 +38,10 @@ public class QReviewer extends EntityPathBase<Reviewer> {
 
     public final ListPath<ReviewerActiveAddress, QReviewerActiveAddress> reviewerActiveAddresses = this.<ReviewerActiveAddress, QReviewerActiveAddress>createList("reviewerActiveAddresses", ReviewerActiveAddress.class, QReviewerActiveAddress.class, PathInits.DIRECT2);
 
+    public final BooleanPath reviewerClause1 = createBoolean("reviewerClause1");
+
+    public final BooleanPath reviewerClause2 = createBoolean("reviewerClause2");
+
     public final ListPath<ReviewerType, QReviewerType> reviewerTypes = this.<ReviewerType, QReviewerType>createList("reviewerTypes", ReviewerType.class, QReviewerType.class, PathInits.DIRECT2);
 
     public final StringPath selfDescription = createString("selfDescription");

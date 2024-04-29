@@ -49,6 +49,8 @@ public class ReviewerService {
                 .job(validateJobExistAndCreate(reviewerSignupRequestDto.getJob()))
                 .blogUrl(reviewerSignupRequestDto.getBlogUrl())
                 .selfDescription(reviewerSignupRequestDto.getSelfDescription())
+                .reviewerClause1(reviewerSignupRequestDto.getReviewerClause1())
+                .reviewerClause2(reviewerSignupRequestDto.getReviewerClause2())
                 .build();
         reviewerRepository.save(reviewer);
         List<Type> typeList = validateTypeExistAndCreate(reviewerSignupRequestDto.getType());

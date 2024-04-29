@@ -11,6 +11,7 @@ import org.hibernate.annotations.Comment;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,8 @@ public class Campaign {
     @Column(name = "campaign_id")
     private Long id;
 
+    @Comment("캠페인 이름")
+    private String campaignName;
 
     @Comment("신청 시작 시간")
     private LocalDateTime applyStartTime;
@@ -92,7 +95,8 @@ public class Campaign {
     private List<CampaignType> campaignTypes = new ArrayList<>();
 
     @Builder
-    public Campaign(LocalDateTime applyStartTime, LocalDateTime applyEndTime, LocalDateTime resultAnnouncementTime, LocalDateTime registrationStartTime, LocalDateTime registrationEndTime, String provision, String day, String visitingTime, String reservationDescription, Market market) {
+    public Campaign(String campaignName, LocalDateTime applyStartTime, LocalDateTime applyEndTime, LocalDateTime resultAnnouncementTime, LocalDateTime registrationStartTime, LocalDateTime registrationEndTime, String provision, String day, String visitingTime, String reservationDescription, Market market) {
+        this.campaignName = campaignName;
         this.applyStartTime = applyStartTime;
         this.applyEndTime = applyEndTime;
         this.resultAnnouncementTime = resultAnnouncementTime;
@@ -117,6 +121,18 @@ public class Campaign {
 
     public void registrationCampaignGender(Gender getGender) {
         gender = getGender;
+    }
+
+    public List<CampaignAge> getCampaignAges() {
+        return Collections.unmodifiableList(campaignAges);
+    }
+
+    public List<CampaignJob> getCampaignJobs() {
+        return Collections.unmodifiableList(campaignJobs);
+    }
+
+    public List<CampaignType> getCampaignTypes() {
+        return Collections.unmodifiableList(campaignTypes);
     }
 
 }

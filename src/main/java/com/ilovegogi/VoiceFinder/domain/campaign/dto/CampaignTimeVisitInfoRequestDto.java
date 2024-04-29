@@ -13,6 +13,8 @@ public class CampaignTimeVisitInfoRequestDto {
 
     private Long marketId;
 
+    private String campaignName;
+
     private LocalDateTime applyStartTime;
     private LocalDateTime applyEndTime;
     private LocalDateTime resultAnnouncementTime;

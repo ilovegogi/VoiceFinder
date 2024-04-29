@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MarketListResponseDto {
 
-    private Long id;
+    private Long marketId;
     private Category category;
     private Long ownerId;
     private Address address;

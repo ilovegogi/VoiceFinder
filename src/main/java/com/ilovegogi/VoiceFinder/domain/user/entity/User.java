@@ -44,12 +44,15 @@ public class User extends Timestamped {
 
     private String provider;
 
-    public User(String email, String password, String username, LocalDate birthDate, String gender, Role role) {
+    private UserRole userRole;
+
+    public User(String email, String password, String username, LocalDate birthDate, String gender, Role role, UserRole userRole) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.birthDate = birthDate;
         this.gender = gender;
         this.role = role;
+        this.userRole = userRole;
     }
 }

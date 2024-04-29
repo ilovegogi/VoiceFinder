@@ -73,6 +73,9 @@ public enum SuccessCode {
     SUCCESS_CAMPAIGN_TIME_VISIT_INFO_REGISTRATION(HttpStatus.OK, "C00100", "신규 캠페인 시간, 방문 정보 등록에 성공했습니다."),
     SUCCESS_CAMPAIGN_MISSION_REGISTRATION(HttpStatus.OK, "C00101", "신규 캠페인 미션 등록에 성공했습니다."),
     SUCCESS_CAMPAIGN_CREATE(HttpStatus.CREATED, "C00102", "신규 캠페인 등록에 성공했습니다."),
+    SUCCESS_GET_ALL_CAMPAIGN(HttpStatus.OK, "C07000", "캠페인 목록 조회에 성공했습니다."),
+    SUCCESS_GET_CAMPAIGN(HttpStatus.OK, "C07001", "캠페인 조회에 성공했습니다."),
+    SUCCESS_GET_CAMPAIGN_NAMES(HttpStatus.OK, "C07001", "캠페인 이름 목록 조회에 성공했습니다."),
 
 
 

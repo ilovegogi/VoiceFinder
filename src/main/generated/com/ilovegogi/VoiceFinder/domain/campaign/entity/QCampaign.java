@@ -32,6 +32,8 @@ public class QCampaign extends EntityPathBase<Campaign> {
 
     public final ListPath<CampaignJob, QCampaignJob> campaignJobs = this.<CampaignJob, QCampaignJob>createList("campaignJobs", CampaignJob.class, QCampaignJob.class, PathInits.DIRECT2);
 
+    public final StringPath campaignName = createString("campaignName");
+
     public final ListPath<CampaignType, QCampaignType> campaignTypes = this.<CampaignType, QCampaignType>createList("campaignTypes", CampaignType.class, QCampaignType.class, PathInits.DIRECT2);
 
     public final StringPath day = createString("day");
