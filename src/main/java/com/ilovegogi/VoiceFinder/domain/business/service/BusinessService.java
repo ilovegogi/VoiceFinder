@@ -29,20 +29,20 @@ public class BusinessService {
     @Transactional
     public BusinessSignupResponseDto signupForBiz(BusinessSignupRequestDto businessSignupRequestDto) {
         User user = validateUserById(businessSignupRequestDto.getUserId());
-        String bizFileUrl = null;
+        /*String bizFileUrl = null;
         if (businessSignupRequestDto.getBizFileUrl() != null && !businessSignupRequestDto.getBizFileUrl().isEmpty()) {
             try {
                 bizFileUrl = fileUploadService.uploadFile(businessSignupRequestDto.getBizFileUrl());
             } catch (IOException e) {
                 throw new CustomException(ErrorCode.FILE_UPLOAD_EXCEPTION);
             }
-        }
+        }*/
         Business business = Business.builder()
                 .user(user)
                 .bizName(businessSignupRequestDto.getBizName())
                 .bossName(businessSignupRequestDto.getBossName())
                 .bizNum(businessSignupRequestDto.getBizNum())
-                .bizFileUrl(bizFileUrl)
+                //.bizFileUrl(bizFileUrl)
                 .bizClause1(businessSignupRequestDto.getBizClause1())
                 .bizClause2(businessSignupRequestDto.getBizClause2())
                 .build();

@@ -1,14 +1,9 @@
 package com.ilovegogi.VoiceFinder.domain.campaign.dto;
 
-import com.ilovegogi.VoiceFinder.domain.campaign.entity.Age;
 import com.ilovegogi.VoiceFinder.domain.campaign.entity.Gender;
-import com.ilovegogi.VoiceFinder.domain.campaign.entity.Job;
-import com.ilovegogi.VoiceFinder.domain.campaign.entity.Type;
-import com.ilovegogi.VoiceFinder.domain.market.entity.Market;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Comment;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,9 +11,8 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CampaignListResponseDto {
+public class CampaignRequestDto {
 
-    private Long campaignId;
     private String marketName;
     private String campaignName;
     private LocalDateTime applyStartTime;
@@ -41,6 +35,5 @@ public class CampaignListResponseDto {
     private List<String> ages;
     private List<String> jobs;
     private List<String> types;
-
-
+    private List<String> imageUrls;
 }

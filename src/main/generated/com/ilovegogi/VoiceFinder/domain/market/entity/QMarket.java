@@ -22,19 +22,43 @@ public class QMarket extends EntityPathBase<Market> {
 
     public static final QMarket market = new QMarket("market");
 
-    public final com.ilovegogi.VoiceFinder.domain.user.entity.QAddress address;
+    public final com.ilovegogi.VoiceFinder.global.entity.QTimestamped _super = new com.ilovegogi.VoiceFinder.global.entity.QTimestamped(this);
+
+    public final StringPath address = createString("address");
+
+    public final com.ilovegogi.VoiceFinder.domain.business.entity.QBusiness business;
 
     public final ListPath<com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign, com.ilovegogi.VoiceFinder.domain.campaign.entity.QCampaign> campaigns = this.<com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign, com.ilovegogi.VoiceFinder.domain.campaign.entity.QCampaign>createList("campaigns", com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign.class, com.ilovegogi.VoiceFinder.domain.campaign.entity.QCampaign.class, PathInits.DIRECT2);
 
-    public final EnumPath<Category> category = createEnum("category", Category.class);
+    public final StringPath category = createString("category");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     public final StringPath description = createString("description");
 
+    public final StringPath detailDescription = createString("detailDescription");
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final ListPath<String, StringPath> imageUrls = this.<String, StringPath>createList("imageUrls", String.class, StringPath.class, PathInits.DIRECT2);
+
+    public final BooleanPath isParking = createBoolean("isParking");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
 
     public final StringPath name = createString("name");
 
-    public final NumberPath<Long> ownerId = createNumber("ownerId", Long.class);
+    public final StringPath parkingDescription = createString("parkingDescription");
+
+    public final StringPath phoneNumber = createString("phoneNumber");
+
+    public final ListPath<String, StringPath> services = this.<String, StringPath>createList("services", String.class, StringPath.class, PathInits.DIRECT2);
+
+    public final StringPath sns = createString("sns");
+
+    public final ListPath<String, StringPath> times = this.<String, StringPath>createList("times", String.class, StringPath.class, PathInits.DIRECT2);
 
     public final StringPath wayDescription = createString("wayDescription");
 
@@ -56,7 +80,7 @@ public class QMarket extends EntityPathBase<Market> {
 
     public QMarket(Class<? extends Market> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.address = inits.isInitialized("address") ? new com.ilovegogi.VoiceFinder.domain.user.entity.QAddress(forProperty("address")) : null;
+        this.business = inits.isInitialized("business") ? new com.ilovegogi.VoiceFinder.domain.business.entity.QBusiness(forProperty("business"), inits.get("business")) : null;
     }
 
 }

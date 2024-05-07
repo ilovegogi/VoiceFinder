@@ -2,6 +2,7 @@ package com.ilovegogi.VoiceFinder.domain.campaign.entity;
 
 import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignMissionRequestDto;
 import com.ilovegogi.VoiceFinder.domain.market.entity.Market;
+import com.ilovegogi.VoiceFinder.global.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "campaign")
-public class Campaign {
+public class Campaign extends Timestamped {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "campaign_id")
@@ -81,6 +82,11 @@ public class Campaign {
     @Comment("성별")
     private Gender gender;
 
+    @ElementCollection
+    @CollectionTable(name = "campaign_images", joinColumns = @JoinColumn(name = "campaign_id"))
+    @Column(name = "image_url")
+    private List<String> imageUrls = new ArrayList<>();
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "market_id")
     private Market market;
@@ -95,7 +101,9 @@ public class Campaign {
     private List<CampaignType> campaignTypes = new ArrayList<>();
 
     @Builder
-    public Campaign(String campaignName, LocalDateTime applyStartTime, LocalDateTime applyEndTime, LocalDateTime resultAnnouncementTime, LocalDateTime registrationStartTime, LocalDateTime registrationEndTime, String provision, String day, String visitingTime, String reservationDescription, Market market) {
+    public Campaign(Market market, List<String> imageUrls, String campaignName, LocalDateTime applyStartTime, LocalDateTime applyEndTime, LocalDateTime resultAnnouncementTime, LocalDateTime registrationStartTime, LocalDateTime registrationEndTime, String provision, String day, String visitingTime, String reservationDescription, String keyword, String additionalKeyword, int minTextNum, int minImageNum, boolean isMap, String etcComment, String notandum, Gender gender, List<CampaignAge> campaignAges, List<CampaignJob> campaignJobs, List<CampaignType> campaignTypes) {
+        this.market = market;
+        this.imageUrls = imageUrls;
         this.campaignName = campaignName;
         this.applyStartTime = applyStartTime;
         this.applyEndTime = applyEndTime;
@@ -106,7 +114,17 @@ public class Campaign {
         this.day = day;
         this.visitingTime = visitingTime;
         this.reservationDescription = reservationDescription;
-        this.market = market;
+        this.keyword = keyword;
+        this.additionalKeyword = additionalKeyword;
+        this.minTextNum = minTextNum;
+        this.minImageNum = minImageNum;
+        this.isMap = isMap;
+        this.etcComment = etcComment;
+        this.notandum = notandum;
+        this.gender= gender;
+        this.campaignAges = campaignAges;
+        this.campaignJobs = campaignJobs;
+        this.campaignTypes = campaignTypes;
     }
 
     public void registrationCampaignMission(CampaignMissionRequestDto campaignMissionRequestDto) {

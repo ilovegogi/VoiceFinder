@@ -22,6 +22,8 @@ public class QCampaign extends EntityPathBase<Campaign> {
 
     public static final QCampaign campaign = new QCampaign("campaign");
 
+    public final com.ilovegogi.VoiceFinder.global.entity.QTimestamped _super = new com.ilovegogi.VoiceFinder.global.entity.QTimestamped(this);
+
     public final StringPath additionalKeyword = createString("additionalKeyword");
 
     public final DateTimePath<java.time.LocalDateTime> applyEndTime = createDateTime("applyEndTime", java.time.LocalDateTime.class);
@@ -35,6 +37,9 @@ public class QCampaign extends EntityPathBase<Campaign> {
     public final StringPath campaignName = createString("campaignName");
 
     public final ListPath<CampaignType, QCampaignType> campaignTypes = this.<CampaignType, QCampaignType>createList("campaignTypes", CampaignType.class, QCampaignType.class, PathInits.DIRECT2);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     public final StringPath day = createString("day");
 
@@ -53,6 +58,9 @@ public class QCampaign extends EntityPathBase<Campaign> {
     public final NumberPath<Integer> minImageNum = createNumber("minImageNum", Integer.class);
 
     public final NumberPath<Integer> minTextNum = createNumber("minTextNum", Integer.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
 
     public final StringPath notandum = createString("notandum");
 
