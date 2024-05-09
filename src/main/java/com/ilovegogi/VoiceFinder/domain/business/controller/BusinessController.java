@@ -26,7 +26,7 @@ public class BusinessController {
     private final BusinessService businessService;
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponse> signupForBiz(@Valid @RequestBody BusinessSignupRequestDto businessSignupRequestDto) throws IOException {
+    public ResponseEntity<ApiResponse> signupForBiz(@Valid @RequestBody BusinessSignupRequestDto businessSignupRequestDto) {
         BusinessSignupResponseDto businessSignupResponseDto = businessService.signupForBiz(businessSignupRequestDto);
         SuccessCode successCode = SuccessCode.SUCCESS_BUSINESS_SIGN_UP;
         return ResponseEntity.status(successCode.getHttpStatus())

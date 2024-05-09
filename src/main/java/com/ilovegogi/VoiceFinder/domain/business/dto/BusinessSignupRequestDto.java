@@ -15,7 +15,7 @@ public class BusinessSignupRequestDto {
     private String bossName;
     private String bizName;
     private Long bizNum;
-    private MultipartFile bizFileUrl;
+    //private MultipartFile bizFileUrl;
     private Boolean bizClause1;
     private Boolean bizClause2;
 

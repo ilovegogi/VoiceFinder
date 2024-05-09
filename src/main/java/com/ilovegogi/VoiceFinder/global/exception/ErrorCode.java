@@ -31,6 +31,7 @@ public enum ErrorCode {
 
     /* BUSINESS */
     FILE_UPLOAD_EXCEPTION(HttpStatus.BAD_REQUEST, "B10100", "파일 업로드에 실패했습니다."),
+    NOT_FOUND_BUSINESS(HttpStatus.NOT_FOUND, "B10101", "사업체를 찾지 못했습니다."),
 
 
     /* CAMPAIGNS */
