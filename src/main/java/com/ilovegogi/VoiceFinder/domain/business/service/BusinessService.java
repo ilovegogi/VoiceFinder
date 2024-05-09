@@ -9,6 +9,7 @@ import com.ilovegogi.VoiceFinder.domain.user.repository.UserRepository;
 import com.ilovegogi.VoiceFinder.global.exception.CustomException;
 import com.ilovegogi.VoiceFinder.global.exception.ErrorCode;
 import com.ilovegogi.VoiceFinder.global.s3.FileUploadService;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class BusinessService {
     private final UserRepository userRepository;
     private final FileUploadService fileUploadService;
 
-    @Transactional
+    /*@Transactional
     public BusinessSignupResponseDto signupForBiz(BusinessSignupRequestDto businessSignupRequestDto) {
         User user = validateUserById(businessSignupRequestDto.getUserId());
         /*String bizFileUrl = null;
@@ -36,7 +37,7 @@ public class BusinessService {
             } catch (IOException e) {
                 throw new CustomException(ErrorCode.FILE_UPLOAD_EXCEPTION);
             }
-        }*/
+        }
         Business business = Business.builder()
                 .user(user)
                 .bizName(businessSignupRequestDto.getBizName())
@@ -48,10 +49,24 @@ public class BusinessService {
                 .build();
         businessRepository.save(business);
         return new BusinessSignupResponseDto(business.getId());
-    }
+    }*/
 
     private User validateUserById(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_BY_ID));
     }
 
+    @Transactional
+    public BusinessSignupResponseDto signupForBiz(User user, String fileUrl, BusinessSignupRequestDto businessSignupRequestDto) {
+        Business business = Business.builder()
+                .user(user)
+                .bizName(businessSignupRequestDto.getBizName())
+                .bossName(businessSignupRequestDto.getBossName())
+                .bizNum(businessSignupRequestDto.getBizNum())
+                .bizFileUrl(fileUrl)
+                .bizClause1(businessSignupRequestDto.getBizClause1())
+                .bizClause2(businessSignupRequestDto.getBizClause2())
+                .build();
+        businessRepository.save(business);
+        return new BusinessSignupResponseDto(business.getId());
+    }
 }
