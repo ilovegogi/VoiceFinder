@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.campaign.entity;
 
+import com.ilovegogi.VoiceFinder.domain.apply.entity.ApplyCampaign;
 import com.ilovegogi.VoiceFinder.domain.campaign.dto.CampaignMissionRequestDto;
 import com.ilovegogi.VoiceFinder.domain.market.entity.Market;
 import com.ilovegogi.VoiceFinder.global.entity.Timestamped;
@@ -99,6 +100,9 @@ public class Campaign extends Timestamped {
 
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private List<CampaignType> campaignTypes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "campaign")
+    private List<ApplyCampaign> applyCampaigns = new ArrayList<>();
 
     @Builder
     public Campaign(Market market, List<String> imageUrls, String campaignName, LocalDateTime applyStartTime, LocalDateTime applyEndTime, LocalDateTime resultAnnouncementTime, LocalDateTime registrationStartTime, LocalDateTime registrationEndTime, String provision, String day, String visitingTime, String reservationDescription, String keyword, String additionalKeyword, int minTextNum, int minImageNum, boolean isMap, String etcComment, String notandum, Gender gender, List<CampaignAge> campaignAges, List<CampaignJob> campaignJobs, List<CampaignType> campaignTypes) {

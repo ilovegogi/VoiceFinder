@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.reviewer.entity;
 
+import com.ilovegogi.VoiceFinder.domain.apply.entity.Apply;
 import com.ilovegogi.VoiceFinder.domain.campaign.entity.Job;
 import com.ilovegogi.VoiceFinder.domain.campaign.entity.Type;
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
@@ -37,6 +38,9 @@ public class Reviewer extends Timestamped {
 
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL)
     private List<ReviewerType> reviewerTypes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "reviewer")
+    private List<Apply> applies = new ArrayList<>();
 
     @Comment("블로그 주소")
     private String blogUrl;
