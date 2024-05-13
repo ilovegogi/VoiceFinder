@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class ReviewerSignupRequestDto {
 
-    private Long userId;
     private String blogUrl;
     private String selfDescription;
     private String job;

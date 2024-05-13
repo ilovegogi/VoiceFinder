@@ -42,8 +42,7 @@ public class ReviewerService {
 
 
     @Transactional
-    public ReviewerSignupResponseDto signupForReviewer(ReviewerSignupRequestDto reviewerSignupRequestDto) {
-        User user = validateUserById(reviewerSignupRequestDto.getUserId());
+    public ReviewerSignupResponseDto signupForReviewer(User user, ReviewerSignupRequestDto reviewerSignupRequestDto) {
         Reviewer reviewer = Reviewer.builder()
                 .user(user)
                 .job(validateJobExistAndCreate(reviewerSignupRequestDto.getJob()))

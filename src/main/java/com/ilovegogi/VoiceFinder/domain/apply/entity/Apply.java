@@ -1,9 +1,11 @@
 package com.ilovegogi.VoiceFinder.domain.apply.entity;
 
+import com.ilovegogi.VoiceFinder.domain.apply.dto.ApplyResponseDto;
 import com.ilovegogi.VoiceFinder.domain.reviewer.entity.Reviewer;
 import com.ilovegogi.VoiceFinder.global.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,5 +28,10 @@ public class Apply extends Timestamped {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewer_id")
     private Reviewer reviewer;
+
+    @Builder
+    public Apply(Reviewer reviewer) {
+        this.reviewer = reviewer;
+    }
 
 }

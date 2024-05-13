@@ -25,6 +25,12 @@ public enum ErrorCode {
     INVALID_VERIFICATION_NUMBER(HttpStatus.BAD_REQUEST, "U10700", "잘못된 인증 번호 입니다."),
     EXCEED_VERIFICATION_TIME(HttpStatus.BAD_REQUEST, "U10701", "인증 번호 입력 시간 초과 입니다."),
 
+    /* REVIEWER */
+    NOT_FOUND_REVIEWER(HttpStatus.NOT_FOUND, "R10000", "리뷰어를 찾지 못했습니다."),
+
+    /* APPLY */
+    INVALID_APPLY(HttpStatus.BAD_REQUEST, "A10500", "유효하지 않은 신청입니다."),
+
     /* MARKET */
     EXISTED_MARKET(HttpStatus.CONFLICT, "M10100", "이미 등록된 매장입니다."),
     NOT_FOUND_MARKET(HttpStatus.NOT_FOUND, "M10000", "해당하는 매장을 찾지 못했습니다."),
