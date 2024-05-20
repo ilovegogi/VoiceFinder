@@ -1,6 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.apply.entity;
 
-import com.ilovegogi.VoiceFinder.domain.apply.dto.ApplyResponseDto;
+import com.ilovegogi.VoiceFinder.domain.campaign.entity.Campaign;
 import com.ilovegogi.VoiceFinder.domain.reviewer.entity.Reviewer;
 import com.ilovegogi.VoiceFinder.global.entity.Timestamped;
 import jakarta.persistence.*;
@@ -9,8 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -22,16 +20,18 @@ public class Apply extends Timestamped {
     @Column(name = "apply_id")
     private Long id;
 
-    @OneToMany(mappedBy = "apply")
-    private List<ApplyCampaign> applyCampaigns = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "campaign_id")
+    private Campaign campaign;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewer_id")
     private Reviewer reviewer;
 
     @Builder
-    public Apply(Reviewer reviewer) {
+    public Apply(Reviewer reviewer, Campaign campaign) {
         this.reviewer = reviewer;
+        this.campaign = campaign;
     }
 
 }

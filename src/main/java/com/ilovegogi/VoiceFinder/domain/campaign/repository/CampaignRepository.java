@@ -9,6 +9,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CampaignRepository extends JpaRepository<Campaign, Long>, QuerydslPredicateExecutor<Campaign> {
@@ -17,5 +18,7 @@ public interface CampaignRepository extends JpaRepository<Campaign, Long>, Query
     List<Campaign> findAllWithAges();
 
     Page<Campaign> findAll(Pageable pageable);
+
+    Optional<Campaign> findById(Long id);
 
 }

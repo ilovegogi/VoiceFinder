@@ -1,5 +1,6 @@
 package com.ilovegogi.VoiceFinder.domain.apply.controller;
 
+import com.ilovegogi.VoiceFinder.domain.apply.dto.ApplyRequestDto;
 import com.ilovegogi.VoiceFinder.domain.apply.dto.ApplyResponseDto;
 import com.ilovegogi.VoiceFinder.domain.apply.service.ApplyService;
 import com.ilovegogi.VoiceFinder.domain.user.entity.User;
@@ -23,11 +24,13 @@ public class ApplyController {
     private final ApplyService applyService;
 
     @PostMapping("/new")
-    public ResponseEntity<ApiResponse> createApply(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ResponseEntity<ApiResponse> createApply(@AuthenticationPrincipal UserDetailsImpl userDetails, ApplyRequestDto applyRequestDto) {
         User user = userDetails.getUser();
         SuccessCode successCode = SuccessCode.SUCCESS_APPLY_CREATE;
-        ApplyResponseDto applyResponseDto = applyService.createApply(user);
+        ApplyResponseDto applyResponseDto = applyService.createApply(user, applyRequestDto);
         return ResponseEntity.status(successCode.getHttpStatus())
                 .body(ApiResponse.of(successCode.getCode(), successCode.getMessage(), applyResponseDto));
     }
+
+
 }
