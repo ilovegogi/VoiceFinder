@@ -26,6 +26,8 @@ public class QCampaign extends EntityPathBase<Campaign> {
 
     public final StringPath additionalKeyword = createString("additionalKeyword");
 
+    public final ListPath<com.ilovegogi.VoiceFinder.domain.apply.entity.Apply, com.ilovegogi.VoiceFinder.domain.apply.entity.QApply> applies = this.<com.ilovegogi.VoiceFinder.domain.apply.entity.Apply, com.ilovegogi.VoiceFinder.domain.apply.entity.QApply>createList("applies", com.ilovegogi.VoiceFinder.domain.apply.entity.Apply.class, com.ilovegogi.VoiceFinder.domain.apply.entity.QApply.class, PathInits.DIRECT2);
+
     public final DateTimePath<java.time.LocalDateTime> applyEndTime = createDateTime("applyEndTime", java.time.LocalDateTime.class);
 
     public final DateTimePath<java.time.LocalDateTime> applyStartTime = createDateTime("applyStartTime", java.time.LocalDateTime.class);

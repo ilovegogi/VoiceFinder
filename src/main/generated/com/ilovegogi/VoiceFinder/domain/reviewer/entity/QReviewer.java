@@ -24,6 +24,8 @@ public class QReviewer extends EntityPathBase<Reviewer> {
 
     public final com.ilovegogi.VoiceFinder.global.entity.QTimestamped _super = new com.ilovegogi.VoiceFinder.global.entity.QTimestamped(this);
 
+    public final ListPath<com.ilovegogi.VoiceFinder.domain.apply.entity.Apply, com.ilovegogi.VoiceFinder.domain.apply.entity.QApply> applies = this.<com.ilovegogi.VoiceFinder.domain.apply.entity.Apply, com.ilovegogi.VoiceFinder.domain.apply.entity.QApply>createList("applies", com.ilovegogi.VoiceFinder.domain.apply.entity.Apply.class, com.ilovegogi.VoiceFinder.domain.apply.entity.QApply.class, PathInits.DIRECT2);
+
     public final StringPath blogUrl = createString("blogUrl");
 
     //inherited
